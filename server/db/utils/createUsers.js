@@ -1,10 +1,9 @@
-require("sqlite3");
+const sqlite = require("sqlite3");
 const { randomBytes, scrypt } = require("crypto");
+
 const users = require("../constants/users.js");
 
-const sqlite = require("sqlite3");
-
-const db = new sqlite.Database("db/TicSys.db", (err) => {
+const db = new sqlite.Database("db/tickets.db", (err) => {
   if (err) throw err;
 });
 

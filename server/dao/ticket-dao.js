@@ -3,7 +3,7 @@
 const sqlite = require("sqlite3");
 
 // open a connection to the database
-const db = new sqlite.Database("db/TicSys.db", (err) => {
+const db = new sqlite.Database("db/tickets.db", (err) => {
   if (err) throw err;
 });
 
@@ -15,6 +15,7 @@ const parseTicket = (data) => {
   };
 };
 
+// query the database for all tickets
 exports.getTickets = () => {
   return new Promise((resolve, reject) => {
     const sql = "SELECT * FROM tickets ORDER BY timestamp DESC";

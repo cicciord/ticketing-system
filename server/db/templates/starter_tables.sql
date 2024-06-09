@@ -28,9 +28,22 @@ CREATE TABLE IF NOT EXISTS "Tickets" (
 	PRIMARY KEY("id"),
 	FOREIGN KEY("owner_id") REFERENCES "Users"("id")
 );
-INSERT INTO "Users" VALUES (1,'admin1','082d67e7760628ec6f5c6ce8af25810c8df39d8a07f3de69a3e2a349cb06a43c5313cf9848833d71b085b2352da9e6abd36ce88003a7b41afc184167f57fd679','6f0205f9f222a977ca5bb316754ea725',1);
-INSERT INTO "Users" VALUES (2,'admin2','a8c3d449d8f603ce164472f6b65d78a4968266f8369760061fcde37c05908b823f84e57170dd89f0aca9a5cafbf7fdee6e164c2deb0484717a81f7b8af8fea1d','650677c4ca489ed8ae03544ea5e8c148',1);
-INSERT INTO "Users" VALUES (3,'user1','abb094b246266f10a714ecd3056ca4850526ae4fe75ff6ea578b9ed61abf14bace8c2d900581849edb2eef8de41c182eb18299091e71b8921de6b83f00721035','f1600a3c3308767ea342b72b2ee4387f',0);
-INSERT INTO "Users" VALUES (4,'user2','4dd4f7c4a57c1eb8dae36d05b673ddd15cd5ec313da531be7efafc2578c1b6ebf46bd25991189597362f8db476ab62513d3c13b50f46721b0f7e13db1375768a','e1eb4f8268c2dc5a61c34830b29c3ada',0);
-INSERT INTO "Users" VALUES (5,'user3','f55d68e86c9b9cee8f88c54322729148fc5c935d55c33de05d3e4057bb93b2e376e524aa7105333bcde37d81018bc49cfee4cb5f189d74c4c8e55add429d79e8','13cb29e30d0095a835aabc7e6b7c37d2',0);
+INSERT INTO "Users" VALUES (1,'admin1','feb753b6a2ee02bf3124af5e0de72b72e4a8409a7cb9e9f15215ec532c239f7855d55da40ddcab52f64cc4feb043b916fd7762f56c0d5666d1304aaedc106270','ec4970daf26c653ab4b105cbceb15b28',1);
+INSERT INTO "Users" VALUES (2,'admin2','dc7f448c4b13919451251483029c4e99c3b04a703b3828408e2022163976fae0ac7fc5625000b27c88a729ad096cf66dcb8adfad5d14f12656c3cf0c158f7011','6557b017b6d09ad6a23c5fb441be4af6',1);
+INSERT INTO "Users" VALUES (3,'user1','4091621efbfca69d66c0dedc1f66bc118c1f1f2210cc2ccf7dae5720eaf9f956698a64cc1b1c80150b05025ca277aafeef760656970b9d6dd9b35cf8d1c1a014','37075f0afb4134288af204b7870dd218',0);
+INSERT INTO "Users" VALUES (4,'user2','db5b91894dff008f721a63c854d1c730fb4df7d40d4596b9793ac223e7c96b53116549c5737eca5f9548214e1c0b0981a8db59ea2f37f94d049ca65dc6d20972','5e203550eedda3120adf0a93eb07f297',0);
+INSERT INTO "Users" VALUES (5,'user3','6b3e34b230d812cc0a054bf8458e274c1ad199aa83bf45ff98f382235862fde0912e8a17e0a54c6b6e02e0425840ec92958e9e3163fbe8346cad1525171896c8','437c8f597ddc287762506f4977975a2e',0);
+INSERT INTO "AdditionalContents" VALUES (1,1,1,1549065600000,'This is a test text');
+INSERT INTO "AdditionalContents" VALUES (2,3,2,1549152000000,'This is a test text');
+INSERT INTO "AdditionalContents" VALUES (3,3,3,1549238400000,'This is another test text');
+INSERT INTO "AdditionalContents" VALUES (4,3,4,1549324800000,'This is yet another test text');
+INSERT INTO "AdditionalContents" VALUES (5,6,2,1549411200000,'This is a test text');
+INSERT INTO "AdditionalContents" VALUES (6,6,3,1549497600000,'This is another test text');
+INSERT INTO "AdditionalContents" VALUES (7,6,4,1549497600000,'This is yet another test text');
+INSERT INTO "Tickets" VALUES (1,1,1,'new feature','Add a new feature',1546387200000,'This is a new feature that needs to be added.');
+INSERT INTO "Tickets" VALUES (2,1,0,'new feature','Add a old feature',1546300800000,'This is an old feature that doesn''t need to be added.');
+INSERT INTO "Tickets" VALUES (3,3,1,'inquiry','Ask a question',1546473600000,'I have a question.');
+INSERT INTO "Tickets" VALUES (4,3,0,'maintenance','Fix a bug',1546560000000,'There is a bug that needs to be fixed.');
+INSERT INTO "Tickets" VALUES (5,4,1,'payment','Pay for a service',1546646400000,'I need to pay for a service.');
+INSERT INTO "Tickets" VALUES (6,4,0,'payment','Error in payment',1546732800000,'There is an error in the payment.');
 COMMIT;
