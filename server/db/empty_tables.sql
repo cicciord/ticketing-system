@@ -6,17 +6,7 @@ CREATE TABLE IF NOT EXISTS "Users" (
 	"admin"	INTEGER DEFAULT 0 CHECK("admin" IN (0, 1)),
 	PRIMARY KEY("username")
 );
-CREATE TABLE IF NOT EXISTS "Tickets" (
-	"id"	INTEGER NOT NULL UNIQUE,
-	"owner"	TEXT NOT NULL,
-	"state"	INTEGER DEFAULT 1 CHECK("state" IN (0, 1)),
-	"category"	TEXT NOT NULL CHECK("category" IN ("inquiry", "maintenance", "new feature", "administrative", "payment")),
-	"title"	TEXT NOT NULL,
-	"timestamp"	INTEGER NOT NULL,
-	FOREIGN KEY("owner") REFERENCES "Users"("username"),
-	PRIMARY KEY("id")
-);
-CREATE TABLE IF NOT EXISTS "TicketContents" (
+CREATE TABLE IF NOT EXISTS "AdditionalContents" (
 	"id"	INTEGER NOT NULL UNIQUE,
 	"ticket_id"	INTEGER NOT NULL,
 	"author"	TEXT NOT NULL,
@@ -25,5 +15,16 @@ CREATE TABLE IF NOT EXISTS "TicketContents" (
 	FOREIGN KEY("ticket_id") REFERENCES "Tickets"("id"),
 	FOREIGN KEY("author") REFERENCES "Users"("username"),
 	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "Tickets" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"owner"	TEXT NOT NULL,
+	"state"	INTEGER DEFAULT 1 CHECK("state" IN (0, 1)),
+	"category"	TEXT NOT NULL CHECK("category" IN ("inquiry", "maintenance", "new feature", "administrative", "payment")),
+	"title"	TEXT NOT NULL,
+	"timestamp"	INTEGER NOT NULL,
+	"text"	TEXT NOT NULL,
+	FOREIGN KEY("owner") REFERENCES "Users"("username"),
+	PRIMARY KEY("id")
 );
 COMMIT;
