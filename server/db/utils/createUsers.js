@@ -20,13 +20,14 @@ const hash = (password) => {
 };
 
 const addUser = async (username, password, salt, admin) => {
-  try {
+  return new Promise((resolve, reject) => {
     sql =
       "INSERT INTO Users (username, password, salt, admin) VALUES (?, ?, ?, ?)";
-    db.run(sql, [username, password, salt, admin]);
-  } catch (error) {
-    console.error(error);
-  }
+    db.run(sql, [username, password, salt, admin], (err) => {
+      if (err) reject(err);
+      resolve();
+    });
+  });
 };
 
 async function main() {

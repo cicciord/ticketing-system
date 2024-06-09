@@ -1,13 +1,18 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-const { getTickets } = require('./dao/ticket');
+const express = require("express");
+const cors = require("cors");
+
+const ticketApi = require("./api/ticket-api");
 
 // init express
 const app = new express();
 const port = 3001;
 
-getTickets().then((tickets) => console.log(tickets));
+app.use(express.json());
+app.use(cors());
+
+app.get("/api/tickets", ticketApi.getTickets);
 
 // activate the server
 app.listen(port, () => {

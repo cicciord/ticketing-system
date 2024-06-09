@@ -9,13 +9,14 @@ const db = new sqlite.Database("db/TicSys.db", (err) => {
 });
 
 const addTicket = async (owner_id, state, category, title, timestamp, text) => {
-  try {
+  return new Promise((resolve, reject) => {
     sql =
       "INSERT INTO Tickets (owner_id, state, category, title, timestamp, text) VALUES (?, ?, ?, ?, ?, ?)";
-    db.run(sql, [owner_id, state, category, title, timestamp, text]);
-  } catch (error) {
-    console.error(error);
-  }
+    db.run(sql, [owner_id, state, category, title, timestamp, text], (err) => {
+      if (err) reject(err);
+      resolve();
+    });
+  });
 };
 
 async function main() {
