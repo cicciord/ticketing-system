@@ -4,7 +4,6 @@ const users = require("../constants/users.js");
 
 const sqlite = require("sqlite3");
 
-// open a connection to the database
 const db = new sqlite.Database("db/TicSys.db", (err) => {
   if (err) throw err;
 });
