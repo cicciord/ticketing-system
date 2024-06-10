@@ -46,7 +46,7 @@ content-type: application/json
 ###
 
 ## Authenticate a user
-POST http://localhost:3001/api/sessions HTTP/1.1
+POST http://localhost:3001/api/login HTTP/1.1
 content-type: application/json
 
 {
@@ -55,10 +55,6 @@ content-type: application/json
 }
 ###
 
-## Get current session
-GET http://localhost:3001/api/sessions/current HTTP/1.1
-###
-
 ## Delete current session
-DELETE http://localhost:3001/api/sessions/current HTTP/1.1
+DELETE http://localhost:3001/api/logout HTTP/1.1
 ###
