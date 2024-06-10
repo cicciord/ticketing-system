@@ -1,0 +1,17 @@
+// dark theme
+$body-bg: #282A36;
+$body-color: #F8F8F2;
+
+// dracula theme
+$theme-colors: (
+  "primary": #BD93F9,
+  "secondary": #6272A4,
+  "success": #50FA7B,
+  "info": #8BE9FD,
+  "warning": #F1FA8C,
+  "danger": #FF5555,
+  "light": #F8F8F2,
+  "dark": #44475A
+);
+
+@import 'bootstrap/scss/bootstrap';
