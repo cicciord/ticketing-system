@@ -7,7 +7,7 @@ GET http://localhost:3001/api/tickets/3 HTTP/1.1
 ###
 
 ## Create a ticket
-POST http://localhost:3001/api/tickets/new HTTP/1.1
+POST http://localhost:3001/api/tickets/ HTTP/1.1
 content-type: application/json
 
 {
@@ -19,7 +19,7 @@ content-type: application/json
 ###
 
 ## Create additional content for a ticket
-POST http://localhost:3001/api/tickets/1/new HTTP/1.1
+POST http://localhost:3001/api/tickets/1/ HTTP/1.1
 content-type: application/json
 
 {
@@ -37,7 +37,7 @@ PUT http://localhost:3001/api/tickets/1/close HTTP/1.1
 ###
 
 ## Update the category of a ticket
-PUT http://localhost:3001/api/tickets/1/updatecategory HTTP/1.1
+PUT http://localhost:3001/api/tickets/1/category HTTP/1.1
 content-type: application/json
 
 {

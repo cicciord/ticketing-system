@@ -8,6 +8,12 @@ const {
   updateCategory,
 } = require("../dao/ticket-dao");
 
+const { validationResult } = require("express-validator");
+
+const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+  return `${location}[${param}]: ${msg}`;
+};
+
 exports.getTickets = async function (_, res) {
   try {
     const tickets = await getTickets();
@@ -18,6 +24,11 @@ exports.getTickets = async function (_, res) {
 };
 
 exports.getAdditionalContents = async function (req, res) {
+  const errors = validationResult(req).formatWith(errorFormatter);
+  if (!errors.isEmpty()) {
+    return res.status(422).json(errors.errors);
+  }
+
   try {
     const { id } = req.params;
     const additionalContents = await getAdditionalContents(id);
@@ -38,6 +49,11 @@ exports.createTicket = async function (req, res) {
 };
 
 exports.createAdditionalContent = async function (req, res) {
+  const errors = validationResult(req).formatWith(errorFormatter);
+  if (!errors.isEmpty()) {
+    return res.status(422).json(errors.errors);
+  }
+
   try {
     const ticketId = req.params.id;
     const additionalContent = req.body;
@@ -52,6 +68,11 @@ exports.createAdditionalContent = async function (req, res) {
 };
 
 exports.openTicket = async function (req, res) {
+  const errors = validationResult(req).formatWith(errorFormatter);
+  if (!errors.isEmpty()) {
+    return res.status(422).json(errors.errors);
+  }
+
   try {
     const { id } = req.params;
     await openTicket(id);
@@ -62,6 +83,11 @@ exports.openTicket = async function (req, res) {
 };
 
 exports.closeTicket = async function (req, res) {
+  const errors = validationResult(req).formatWith(errorFormatter);
+  if (!errors.isEmpty()) {
+    return res.status(422).json(errors.errors);
+  }
+
   try {
     const { id } = req.params;
     await closeTicket(id);
@@ -72,6 +98,11 @@ exports.closeTicket = async function (req, res) {
 };
 
 exports.updateCategory = async function (req, res) {
+  const errors = validationResult(req).formatWith(errorFormatter);
+  if (!errors.isEmpty()) {
+    return res.status(422).json(errors.errors);
+  }
+
   try {
     const ticketId = req.params.id;
     const { category } = req.body;
