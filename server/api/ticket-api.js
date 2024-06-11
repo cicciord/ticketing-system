@@ -1,5 +1,7 @@
 const {
   getTickets,
+  getTicketOwnerId,
+  getTicketState,
   getAdditionalContents,
   createTicket,
   createAdditionalContent,
@@ -66,6 +68,18 @@ exports.createAdditionalContent = async function (req, res) {
     return res.status(422).json(errors.errors);
   }
 
+  let state;
+  try {
+    state = await getTicketState(req.params.id);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+  console.log(state);
+
+  if (state === "closed") {
+    return res.status(400).json({ error: "Ticket is closed" });
+  }
+
   try {
     const ticketId = req.params.id;
     const additionalContent = req.body;
@@ -102,8 +116,20 @@ exports.closeTicket = async function (req, res) {
 
   try {
     const { id } = req.params;
-    await closeTicket(id);
-    res.json({ id });
+
+    let ownerId;
+    try {
+      ownerId = await getTicketOwnerId(id);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+
+    if (req.user.admin || req.user.id === ownerId) {
+      await closeTicket(id);
+      res.json({ id });
+    } else {
+      res.status(401).json({ error: "Not authorized" });
+    }
   } catch (error) {
     res.status(500).json(error);
   }

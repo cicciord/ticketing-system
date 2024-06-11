@@ -37,6 +37,34 @@ exports.getTickets = () => {
   });
 };
 
+exports.getTicketOwnerId = (ticketId) => {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT owner_id
+      FROM Tickets
+      WHERE id = ?;
+    `;
+    db.get(sql, [ticketId], (err, row) => {
+      if (err) reject(err);
+      resolve(row.owner_id);
+    });
+  });
+};
+
+exports.getTicketState = (ticketId) => {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT state
+      FROM Tickets
+      WHERE id = ?;
+    `;
+    db.get(sql, [ticketId], (err, row) => {
+      if (err) reject(err);
+      resolve(row.state === 1 ? "open" : "closed");
+    });
+  });
+}
+
 // query the additional contents of a ticket
 exports.getAdditionalContents = (ticketId) => {
   return new Promise((resolve, reject) => {

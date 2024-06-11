@@ -4,7 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
 const morgan = require("morgan");
-const { query, checkSchema } = require("express-validator");
+const { param, checkSchema } = require("express-validator");
 
 const passport = require("./passport/setup");
 const ticketApi = require("./api/ticket-api");
@@ -37,41 +37,56 @@ app.use(
 // init passport
 app.use(passport.authenticate("session"));
 
+const isLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.status(401).json({ error: "Not authorized" });
+};
+
+const isLoggedInAdmin = (req, res, next) => {
+  if (req.isAuthenticated() && req.user.admin) {
+    return next();
+  }
+  return res.status(401).json({ error: "Not authorized" });
+};
+
 // TICKETS ROUTES
 app.get("/api/tickets", ticketApi.getTickets);
 app.get(
   "/api/tickets/:id",
-  [query("id").isInt({ min: 1 })],
+  [param("id").isInt({ min: 1 }), isLoggedIn],
   ticketApi.getAdditionalContents,
 );
 
 app.post(
   "/api/tickets/",
-  [checkSchema(ticketSchema, ["body"])],
+  [checkSchema(ticketSchema, ["body"]), isLoggedIn],
   ticketApi.createTicket,
 );
 app.post(
   "/api/tickets/:id/",
   [
-    query("id").isInt({ min: 1 }),
+    param("id").isInt({ min: 1 }),
     checkSchema(additionalContentSchema, ["body"]),
+    isLoggedIn,
   ],
   ticketApi.createAdditionalContent,
 );
 
 app.put(
   "/api/tickets/:id/open",
-  [query("id").isInt({ min: 1 })],
+  [param("id").isInt({ min: 0 }), isLoggedInAdmin],
   ticketApi.openTicket,
 );
 app.put(
   "/api/tickets/:id/close",
-  [query("id").isInt({ min: 1 })],
+  [param("id").isInt({ min: 1 }), isLoggedIn],
   ticketApi.closeTicket,
 );
 app.put(
   "/api/tickets/:id/category",
-  [query("id").isInt({ min: 1 })],
+  [param("id").isInt({ min: 1 }), isLoggedInAdmin],
   ticketApi.updateCategory,
 );
 
