@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 function Layout() {
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark">
+      <Navbar className="shadow mb-5" bg="dark" data-bs-theme="dark">
         <Container>
           <Navbar.Brand>Ticketing System</Navbar.Brand>
           <Navbar.Toggle />
