@@ -10,14 +10,21 @@ const {
 
 const { validationResult } = require("express-validator");
 
-const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+const errorFormatter = ({ location, msg, param }) => {
   return `${location}[${param}]: ${msg}`;
 };
 
-exports.getTickets = async function (_, res) {
+exports.getTickets = async function (req, res) {
   try {
     const tickets = await getTickets();
-    res.json(tickets);
+    if (req.isAuthenticated()) {
+      res.json(tickets);
+    } else {
+      tickets.forEach((ticket) => {
+        delete ticket.text;
+      });
+      res.json(tickets);
+    }
   } catch (error) {
     res.status(500).json(error);
   }
