@@ -4,11 +4,12 @@ const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
 const morgan = require("morgan");
-const { check } = require("express-validator");
+const { query, checkSchema } = require("express-validator");
 
 const passport = require("./passport/setup");
 const ticketApi = require("./api/ticket-api");
 const userApi = require("./api/user-api");
+const { ticketSchema, additionalContentSchema } = require("./validator");
 
 // init express
 const app = new express();
@@ -40,30 +41,37 @@ app.use(passport.authenticate("session"));
 app.get("/api/tickets", ticketApi.getTickets);
 app.get(
   "/api/tickets/:id",
-  [check("id").isInt({ min: 1 })],
+  [query("id").isInt({ min: 1 })],
   ticketApi.getAdditionalContents,
 );
 
-app.post("/api/tickets/", ticketApi.createTicket);
+app.post(
+  "/api/tickets/",
+  [checkSchema(ticketSchema, ["body"])],
+  ticketApi.createTicket,
+);
 app.post(
   "/api/tickets/:id/",
-  [check("id").isInt({ min: 1 })],
+  [
+    query("id").isInt({ min: 1 }),
+    checkSchema(additionalContentSchema, ["body"]),
+  ],
   ticketApi.createAdditionalContent,
 );
 
 app.put(
   "/api/tickets/:id/open",
-  [check("id").isInt({ min: 1 })],
+  [query("id").isInt({ min: 1 })],
   ticketApi.openTicket,
 );
 app.put(
   "/api/tickets/:id/close",
-  [check("id").isInt({ min: 1 })],
+  [query("id").isInt({ min: 1 })],
   ticketApi.closeTicket,
 );
 app.put(
   "/api/tickets/:id/category",
-  [check("id").isInt({ min: 1 })],
+  [query("id").isInt({ min: 1 })],
   ticketApi.updateCategory,
 );
 

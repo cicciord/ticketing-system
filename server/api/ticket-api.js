@@ -39,6 +39,11 @@ exports.getAdditionalContents = async function (req, res) {
 };
 
 exports.createTicket = async function (req, res) {
+  const errors = validationResult(req).formatWith(errorFormatter);
+  if (!errors.isEmpty()) {
+    return res.status(422).json(errors.errors);
+  }
+
   try {
     const ticket = req.body;
     const id = await createTicket(ticket);
