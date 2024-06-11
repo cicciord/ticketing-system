@@ -22,7 +22,11 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // enable cors
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:5173",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // enable session management
 app.use(
@@ -37,6 +41,7 @@ app.use(
 // init passport
 app.use(passport.authenticate("session"));
 
+// middleware to check if the user is logged in
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();

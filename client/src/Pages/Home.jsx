@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+import { useUser } from "../hooks/useUser";
+import { Button } from "react-bootstrap";
 
 function Home() {
+  const { user, login } = useUser();
   return (
-    <div>Home</div>
-  )
+    <>
+    <div>
+      Username: {user?.username}, admin: {user?.admin ? "true" : "false"}
+    </div>
+      <Button onClick={() => login("admin1", "passwd1")}>Login</Button>
+    </>
+  );
 }
 
-export default Home
+export default Home;
