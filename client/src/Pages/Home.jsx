@@ -1,17 +1,30 @@
-import React from "react";
+import { useEffect } from "react";
 import { useUser } from "../hooks/useUser";
-import { Button } from "react-bootstrap";
+import { useTickets } from "../hooks/useTickets";
+
+import Ticket from "../Components/Ticket";
 
 function Home() {
-  const { user, login } = useUser();
-  return (
-    <>
-    <div>
-      Username: {user?.username}, admin: {user?.admin ? "true" : "false"}
-    </div>
-      <Button onClick={() => login("admin1", "passwd1")}>Login</Button>
-    </>
-  );
+  const { isLoggedIn, user } = useUser();
+  const { tickets } = useTickets();
+
+  const renderTickets = tickets.map((ticket) => {
+    return (
+      <Ticket
+        key={ticket.ticket_id}
+        ticket={ticket}
+        isLoggedIn={isLoggedIn}
+        username={user?.username}
+        className="mb-4"
+      />
+    );
+  });
+
+  useEffect(() => {
+    document.title = "Ticketing System";
+  }, []);
+
+  return <>{renderTickets}</>;
 }
 
 export default Home;

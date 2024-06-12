@@ -1,20 +1,64 @@
-import React from "react";
 import { Navbar, Container, Button } from "react-bootstrap";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { BsStar } from "react-icons/bs";
+import { useUser } from "../hooks/useUser";
 
 function Layout() {
+  const { user, isLoading, isLoggedIn, logout } = useUser();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleHomePress = () => {
+    navigate("/");
+  };
+
+  const handleLoginPress = () => {
+    navigate("/login");
+  };
+
+  const handleLogoutPress = () => {
+    logout();
+  };
+
   return (
     <>
-      <Navbar className="shadow mb-5" bg="dark" data-bs-theme="dark">
+      <Navbar
+        className="shadow mb-5 border-bottom border-secondary"
+        bg="dark"
+        data-bs-theme="dark"
+      >
         <Container>
-          <Navbar.Brand>Ticketing System</Navbar.Brand>
+          <Navbar.Brand href="#" onClick={handleHomePress}>
+            Ticketing System
+          </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            <Button>Log In</Button>
+            {isLoggedIn && (
+              <Navbar.Text className="mx-3 d-flex align-items-center">
+                {user?.username}{" "}
+                {user?.admin ? <BsStar className="mx-2" /> : ""}{" "}
+              </Navbar.Text>
+            )}
+            {isLoggedIn ? (
+              <Button
+                variant="secondary"
+                onClick={handleLogoutPress}
+                disabled={isLoading}
+              >
+                Log Out
+              </Button>
+            ) : (
+              <Button
+                onClick={handleLoginPress}
+                disabled={pathname === "/login"}
+              >
+                Log In
+              </Button>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container >
+      <Container className="d-flex flex-column align-items-center">
         <Outlet />
       </Container>
     </>

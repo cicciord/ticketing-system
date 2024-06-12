@@ -1,31 +1,70 @@
-import { createContext, useState } from "react";
-import { logIn } from "../api/login";
-import { useUser } from "../hooks/useUser";
+import { createContext, useEffect, useState } from "react";
+import API from "../api";
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState(null);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const user = await API.getUser();
+        setUser({ id: user.id, username: user.username, admin: user.admin });
+        setIsLoggedIn(true);
+      } catch (error) {}
+    };
+
+    checkLogin();
+  }, []);
 
   const login = async (username, password) => {
-
-    setIsLoggingIn(true);
+    setIsLoading(true);
     try {
-      const user = await logIn(username, password);
-      setUser({ username: user.username, admin: user.admin });
+      const user = await API.login(username, password);
+      setIsError(false);
+      setUser({ id: user.id, username: user.username, admin: user.admin });
       setIsLoggedIn(true);
     } catch (error) {
-      throw error;
+      setError(error);
+      setIsError(true);
     } finally {
-      setIsLoggingIn(false);
+      setIsLoading(false);
+    }
+  };
+
+  const logout = async () => {
+    setIsLoading(true);
+    try {
+      await API.logout();
+      setIsError(false);
+      setUser(null);
+      setIsLoggedIn(false);
+    } catch (error) {
+      setError(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, login, isLoggingIn, isLoggedIn }}
+      value={{
+        user,
+        setUser,
+        login,
+        logout,
+        isLoading,
+        isLoggedIn,
+        error,
+        isError,
+        setIsError,
+      }}
     >
       {children}
     </UserContext.Provider>

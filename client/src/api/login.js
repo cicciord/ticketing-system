@@ -1,9 +1,9 @@
 import { handleHttpRes } from "./utils/handleHttpRes";
 import { SERVER_URL } from "./constants/server";
 
-export const logIn = async (username, password) => {
+export const login = async (username, password) => {
   return handleHttpRes(
-    fetch(`${SERVER_URL}/login`, {
+    fetch(`${SERVER_URL}/sessions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

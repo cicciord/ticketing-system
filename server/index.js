@@ -96,8 +96,9 @@ app.put(
 );
 
 // USER ROUTES
-app.post("/api/login", userApi.login);
-app.delete("/api/logout", userApi.logout);
+app.post("/api/sessions", userApi.login);
+app.get("/api/sessions/current", userApi.getSession);
+app.delete("/api/sessions/current", userApi.logout);
 
 // activate the server
 app.listen(port, () => {

@@ -3,7 +3,7 @@ GET http://localhost:3001/api/tickets HTTP/1.1
 ###
 
 ##
-GET http://localhost:3001/api/tickets/3 HTTP/1.1
+GET http://localhost:3001/api/tickets/2 HTTP/1.1
 ###
 
 ## Create a ticket
@@ -19,7 +19,7 @@ content-type: application/json
 ###
 
 ## Create additional content for a ticket
-POST http://localhost:3001/api/tickets/3/ HTTP/1.1
+POST http://localhost:3001/api/tickets/2/ HTTP/1.1
 content-type: application/json
 
 {
@@ -29,7 +29,7 @@ content-type: application/json
 ###
 
 ## Set status of a ticket as open
-PUT http://localhost:3001/api/tickets/3/open HTTP/1.1
+PUT http://localhost:3001/api/tickets/2/open HTTP/1.1
 ###
 
 ## Set status of a ticket as closed
@@ -46,7 +46,7 @@ content-type: application/json
 ###
 
 ## Authenticate a user
-POST http://localhost:3001/api/login HTTP/1.1
+POST http://localhost:3001/api/sessions HTTP/1.1
 content-type: application/json
 
 {
@@ -56,5 +56,5 @@ content-type: application/json
 ###
 
 ## Delete current session
-DELETE http://localhost:3001/api/logout HTTP/1.1
+DELETE http://localhost:3001/api/sessions/current HTTP/1.1
 ###
