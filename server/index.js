@@ -60,7 +60,8 @@ const isLoggedInAdmin = (req, res, next) => {
 app.get("/api/tickets", ticketApi.getTickets);
 app.get(
   "/api/tickets/:id",
-  [param("id").isInt({ min: 1 }), isLoggedIn],
+  [param("id").isInt({ min: 1 })],
+  isLoggedIn,
   ticketApi.getAdditionalContents,
 );
 
@@ -82,17 +83,20 @@ app.post(
 
 app.put(
   "/api/tickets/:id/open",
-  [param("id").isInt({ min: 0 }), isLoggedInAdmin],
+  [param("id").isInt({ min: 0 })],
+  isLoggedInAdmin,
   ticketApi.openTicket,
 );
 app.put(
   "/api/tickets/:id/close",
-  [param("id").isInt({ min: 1 }), isLoggedIn],
+  [param("id").isInt({ min: 1 })],
+  isLoggedIn,
   ticketApi.closeTicket,
 );
 app.put(
   "/api/tickets/:id/category",
-  [param("id").isInt({ min: 1 }), isLoggedInAdmin],
+  [param("id").isInt({ min: 1 })],
+  isLoggedInAdmin,
   ticketApi.updateCategory,
 );
 
