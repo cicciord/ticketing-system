@@ -4,6 +4,7 @@ import { logout } from "./logout";
 import { getTickets } from "./getTickets";
 import { getAdditionalContents } from "./getAdditionalContents";
 import { createTicket } from "./createTicket";
+import { createAdditionalContent } from "./createAdditionalContent";
 
 export default {
   login,
@@ -12,4 +13,5 @@ export default {
   getTickets,
   getAdditionalContents,
   createTicket,
+  createAdditionalContent,
 };

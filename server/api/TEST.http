@@ -11,7 +11,6 @@ POST http://localhost:3001/api/tickets/ HTTP/1.1
 content-type: application/json
 
 {
-    "owner_id": 1,
     "category": "inquiry",
     "title": "This is a Title",
     "text": "This is the text of the ticket"

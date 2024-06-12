@@ -84,7 +84,7 @@ exports.getAdditionalContents = (ticketId) => {
           Users U ON AC.author_id = U.id
       WHERE 
           AC.ticket_id = ?
-      ORDER BY AC.timestamp DESC;
+      ORDER BY AC.timestamp ASC;
     `;
     db.all(sql, [ticketId], (err, rows) => {
       if (err) reject(err);

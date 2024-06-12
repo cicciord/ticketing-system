@@ -9,7 +9,7 @@ function AdditionalContent({ additionalContent }) {
           <div className="fw-bold text-secondary">
             {additionalContent?.author_username}
           </div>
-          <div className="text-secondary">{dayjs(additionalContent?.ac_timestamp).format("YY/MM/DD")}</div>
+          <div className="text-secondary">{dayjs.unix(additionalContent?.ac_timestamp).format("DD/MM/YYYY")}</div>
         </div>
         {additionalContent?.ac_text}
       </div>
