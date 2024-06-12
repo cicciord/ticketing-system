@@ -66,7 +66,8 @@ app.get(
 
 app.post(
   "/api/tickets/",
-  [checkSchema(ticketSchema, ["body"]), isLoggedIn],
+  [checkSchema(ticketSchema, ["body"])],
+  isLoggedIn,
   ticketApi.createTicket,
 );
 app.post(

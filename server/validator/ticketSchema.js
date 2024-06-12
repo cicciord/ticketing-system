@@ -1,5 +1,4 @@
 module.exports = {
-  owner_id: { isInt: { min: 1 } },
   category: {
     isIn: {
       options: [

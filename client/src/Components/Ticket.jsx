@@ -24,7 +24,7 @@ function Ticket({ ticket, isLoggedIn, username, className }) {
           <p>{ticket?.title}</p>
           <footer className="blockquote-footer">
             {ticket?.owner_username} on{" "}
-            {dayjs(ticket?.timestamp).format("YY/MM/DD")}
+            {dayjs.unix(ticket?.timestamp).format("DD/MM/YYYY")}
           </footer>
         </blockquote>
       </Card.Body>

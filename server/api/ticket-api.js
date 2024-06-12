@@ -55,8 +55,9 @@ exports.createTicket = async function (req, res) {
 
   try {
     const ticket = req.body;
-    const id = await createTicket(ticket);
-    res.json({ id });
+    const { id: owner_id } = req.user;
+    const ticketId = await createTicket({ ...ticket, owner_id });
+    res.json({ ticketId });
   } catch (error) {
     res.status(500).json(error);
   }
