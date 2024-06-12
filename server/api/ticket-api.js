@@ -75,7 +75,6 @@ exports.createAdditionalContent = async function (req, res) {
   } catch (error) {
     res.status(500).json(error);
   }
-  console.log(state);
 
   if (state === "closed") {
     return res.status(400).json({ error: "Ticket is closed" });
@@ -84,9 +83,11 @@ exports.createAdditionalContent = async function (req, res) {
   try {
     const ticketId = req.params.id;
     const additionalContent = req.body;
+    const authorId = req.user.id;
     const id = await createAdditionalContent({
       ...additionalContent,
       ticket_id: ticketId,
+      author_id: authorId,
     });
     res.json({ id });
   } catch (error) {

@@ -23,7 +23,6 @@ POST http://localhost:3001/api/tickets/2/ HTTP/1.1
 content-type: application/json
 
 {
-    "author_id": 1,
     "text": "This is the text of the ticket"
 }
 ###
