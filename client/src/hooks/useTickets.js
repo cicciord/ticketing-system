@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useUser } from "./useUser";
-import { getTickets } from "../api/getTickets";
+import API from "../api";
 
 const useTickets = () => {
   const [tickets, setTickets] = useState([]);
@@ -11,19 +11,21 @@ const useTickets = () => {
   const { isLoggedIn } = useUser();
 
   useEffect(() => {
-    setIsLoading(true);
-    getTickets()
-      .then((res) => {
+    const fetchTickets = async () => {
+      setIsLoading(true);
+      try {
+        const res = await API.getTickets();
         setTickets(res);
         setIsError(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         setError(err);
         setIsError(true);
-      })
-      .finally(() => {
+      } finally {
         setIsLoading(false);
-      });
+      }
+    };
+
+    fetchTickets();
   }, [isLoggedIn]);
 
   return { tickets, isLoading, isError, error };

@@ -14,4 +14,19 @@ $theme-colors: (
   "dark": #44475A
 );
 
+// Custom styles for disabled input fields
+input[disabled],
+textarea[disabled],
+select[disabled] {
+  background-color: map-get($theme-colors, "secondary") !important;
+  color: $body-color !important;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+input[disabled]::placeholder,
+textarea[disabled]::placeholder {
+  color: lighten($body-color, 30%) !important;
+}
+
 @import 'bootstrap/scss/bootstrap';

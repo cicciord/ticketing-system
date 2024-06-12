@@ -1,6 +1,7 @@
 "use strict";
 
 const sqlite = require("sqlite3");
+const dayjs = require("dayjs");
 
 // open a connection to the database
 const db = new sqlite.Database("db/tickets.db", (err) => {
@@ -28,10 +29,12 @@ exports.getTickets = () => {
               Tickets.text,
               Users.username AS owner_username
       FROM Tickets
-      JOIN Users ON Tickets.owner_id = Users.id;
+      JOIN Users ON Tickets.owner_id = Users.id
+      ORDER BY Tickets.timestamp DESC;
     `;
     db.all(sql, (err, rows) => {
       if (err) reject(err);
+      console.log("rows", rows);
       resolve(rows.map(parseTicket));
     });
   });
@@ -63,7 +66,7 @@ exports.getTicketState = (ticketId) => {
       resolve(row.state === 1 ? "open" : "closed");
     });
   });
-}
+};
 
 // query the additional contents of a ticket
 exports.getAdditionalContents = (ticketId) => {
@@ -80,7 +83,8 @@ exports.getAdditionalContents = (ticketId) => {
       JOIN 
           Users U ON AC.author_id = U.id
       WHERE 
-          AC.ticket_id = ?;
+          AC.ticket_id = ?
+      ORDER BY AC.timestamp DESC;
     `;
     db.all(sql, [ticketId], (err, rows) => {
       if (err) reject(err);
@@ -92,7 +96,7 @@ exports.getAdditionalContents = (ticketId) => {
 // create a new ticket
 exports.createTicket = (ticket) => {
   return new Promise((resolve, reject) => {
-    const currentTimestamp = new Date().valueOf();
+    const currentTimestamp = dayjs().unix();
     const sql = `
       INSERT INTO Tickets (owner_id, state, category, title, text, timestamp)
       VALUES (?, ?, ?, ?, ?, ?);
@@ -118,7 +122,7 @@ exports.createTicket = (ticket) => {
 // create a new additional content
 exports.createAdditionalContent = (additionalContent) => {
   return new Promise((resolve, reject) => {
-    const currentTimestamp = new Date().valueOf();
+    const currentTimestamp = dayjs().unix();
     const sql = `
       INSERT INTO AdditionalContents (ticket_id, author_id, text, timestamp)
       VALUES (?, ?, ?, ?);

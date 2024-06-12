@@ -1,6 +1,9 @@
+import dayjs from "dayjs";
 import { useState } from "react";
-import { Card, Badge, Collapse, ListGroup } from "react-bootstrap";
+import { Card, Badge } from "react-bootstrap";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+
+import ExpandedTicket from "./ExpandedTicket";
 
 function Ticket({ ticket, isLoggedIn, username, className }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -20,27 +23,27 @@ function Ticket({ ticket, isLoggedIn, username, className }) {
         <blockquote className="blockquote mb-0">
           <p>{ticket?.title}</p>
           <footer className="blockquote-footer">
-            {ticket?.owner_username} on {ticket?.timestamp}
+            {ticket?.owner_username} on{" "}
+            {dayjs(ticket?.timestamp).format("YY/MM/DD")}
           </footer>
         </blockquote>
       </Card.Body>
       {isLoggedIn && (
         <Card.Footer className="d-flex flex-column justify-content-center align-items-center">
           {isExpanded ? (
-            <BsChevronUp onClick={() => setIsExpanded(false)} />
+            <BsChevronUp
+              type="button"
+              onClick={() => setIsExpanded(false)}
+              className="my-2"
+            />
           ) : (
-            <BsChevronDown onClick={() => setIsExpanded(true)} />
+            <BsChevronDown
+              type="button"
+              onClick={() => setIsExpanded(true)}
+              className="my-2"
+            />
           )}
-          <Collapse in={isExpanded} className="mt-2">
-            <ListGroup className="w-100">
-              <ListGroup.Item>Cras justo odio</ListGroup.Item>
-              <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-              <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-              <ListGroup.Item as="button" className="text-center">
-                +
-              </ListGroup.Item>
-            </ListGroup>
-          </Collapse>
+          <ExpandedTicket isExpanded={isExpanded} ticket={ticket} />
         </Card.Footer>
       )}
     </Card>

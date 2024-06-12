@@ -1,9 +1,10 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Layout from "./Layout/Layout";
+import Layout from "./Pages/Layout";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
+import CreateTicket from "./Pages/CreateTicket";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="create-ticket" element={<CreateTicket />} />
         </Route>
       </Routes>
     </BrowserRouter>
