@@ -38,7 +38,7 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} data-bs-theme="dark">
       <Modal.Header closeButton>
         <Modal.Title>Add Content</Modal.Title>
       </Modal.Header>

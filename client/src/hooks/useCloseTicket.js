@@ -21,7 +21,15 @@ const useCloseTicket = () => {
     }
   };
 
-  return { closeTicket, isSuccess, isLoading, isError, setIsError, error };
+  return {
+    closeTicket,
+    isSuccess,
+    setIsSuccess,
+    isLoading,
+    isError,
+    setIsError,
+    error,
+  };
 };
 
 export { useCloseTicket };

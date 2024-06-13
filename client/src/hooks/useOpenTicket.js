@@ -21,7 +21,15 @@ const useOpenTicket = () => {
     }
   };
 
-  return { openTicket, isSuccess, isLoading, isError, setIsError, error };
+  return {
+    openTicket,
+    isSuccess,
+    setIsSuccess,
+    isLoading,
+    isError,
+    setIsError,
+    error,
+  };
 };
 
 export { useOpenTicket };

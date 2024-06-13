@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, Badge, Form } from "react-bootstrap";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { useCloseTicket } from "../hooks/useCloseTicket";
@@ -9,39 +9,87 @@ import { useUpdateCategory } from "../hooks/useUpdateCategory";
 import ExpandedTicket from "./ExpandedTicket";
 import { useUser } from "../hooks/useUser";
 
-function Ticket({ ticket, className, setTickets, refetch }) {
+function Ticket({ ticket, className, setTickets }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [category, setCategory] = useState(ticket.category);
   const [categoryChanged, setCategoryChanged] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { user, isLoggedIn } = useUser();
-  const { closeTicket } = useCloseTicket();
-  const { openTicket } = useOpenTicket();
-  const { updateCategory } = useUpdateCategory();
+  const {
+    closeTicket,
+    isLoading: isClosingTicket,
+    isSuccess: isClosed,
+    setIsSuccess: setIsClosed,
+  } = useCloseTicket();
+  const {
+    openTicket,
+    isLoading: isOpeningTicket,
+    isSuccess: isOpened,
+    setIsSuccess: setIsOpened,
+  } = useOpenTicket();
+  const {
+    updateCategory,
+    isUpdatingCategory,
+    isSuccess: isUpdated,
+    setIsSuccess: setIsUpdated,
+  } = useUpdateCategory();
+
+  useEffect(() => {
+    setIsLoading(isClosingTicket || isOpeningTicket || isUpdatingCategory);
+  }, [isClosingTicket, isOpeningTicket, isUpdatingCategory]);
+
+  useEffect(() => {
+    if (isUpdated) {
+      setTickets((tickets) => {
+        return tickets.map((t) => {
+          if (t.ticket_id === ticket.ticket_id) {
+            return { ...t, category };
+          }
+          return t;
+        });
+      });
+    }
+
+    setIsUpdated(false);
+  }, [isUpdated]);
+
+  useEffect(() => {
+    if (isClosed) {
+      setTickets((tickets) => {
+        return tickets.map((t) => {
+          if (t.ticket_id === ticket.ticket_id) {
+            return { ...t, state: "closed" };
+          }
+          return t;
+        });
+      });
+    }
+
+    setIsClosed(false);
+  }, [isClosed]);
+
+  useEffect(() => {
+    if (isOpened) {
+      setTickets((tickets) => {
+        return tickets.map((t) => {
+          if (t.ticket_id === ticket.ticket_id) {
+            return { ...t, state: "open" };
+          }
+          return t;
+        });
+      });
+    }
+
+    setIsOpened(false);
+  }, [isOpened]);
 
   const handleTicketClose = () => {
     closeTicket(ticket.ticket_id);
-    setTickets((tickets) => {
-      return tickets.map((t) => {
-        if (t.ticket_id === ticket.ticket_id) {
-          return { ...t, state: "closed" };
-        }
-        return t;
-      });
-    });
-    // refetch();
   };
 
   const handleTicketOpen = () => {
     openTicket(ticket.ticket_id);
-    setTickets((tickets) => {
-      return tickets.map((t) => {
-        if (t.ticket_id === ticket.ticket_id) {
-          return { ...t, state: "open" };
-        }
-        return t;
-      });
-    });
-    // refetch();
   };
 
   const handleCategroyChange = (e) => {
@@ -51,16 +99,7 @@ function Ticket({ ticket, className, setTickets, refetch }) {
 
   const handleUpdateCategory = () => {
     updateCategory(ticket.ticket_id, category);
-    setTickets((tickets) => {
-      return tickets.map((t) => {
-        if (t.ticket_id === ticket.ticket_id) {
-          return { ...t, category };
-        }
-        return t;
-      });
-    });
     setCategoryChanged(false);
-    // refetch();
   };
 
   return (
@@ -77,6 +116,7 @@ function Ticket({ ticket, className, setTickets, refetch }) {
               size="sm"
               value={category}
               onChange={handleCategroyChange}
+              disabled={isLoading}
             >
               <option value="inquiry">inquiry</option>
               <option value="maintenance">maintenance</option>
@@ -91,6 +131,7 @@ function Ticket({ ticket, className, setTickets, refetch }) {
                 text="dark"
                 className="ms-2"
                 onClick={handleUpdateCategory}
+                disabled={isLoading}
               >
                 update category
               </Badge>
@@ -109,6 +150,7 @@ function Ticket({ ticket, className, setTickets, refetch }) {
               onClick={
                 ticket?.state === "open" ? handleTicketClose : handleTicketOpen
               }
+              disabled={isLoading}
             >
               {ticket?.state === "open" ? "close ticket" : "reopen ticket"}
             </Badge>
@@ -127,6 +169,7 @@ function Ticket({ ticket, className, setTickets, refetch }) {
             bg="warning"
             text="dark"
             onClick={handleTicketClose}
+            disabled={isLoading}
           >
             close ticket
           </Badge>

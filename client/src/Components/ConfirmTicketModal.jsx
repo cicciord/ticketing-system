@@ -9,7 +9,7 @@ function ConfirmTicketModal({
   handleSubmit,
 }) {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} data-bs-theme="dark">
       <Modal.Header closeButton>
         <Modal.Title>Confirm New Ticket</Modal.Title>
       </Modal.Header>

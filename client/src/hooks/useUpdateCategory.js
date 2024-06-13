@@ -21,7 +21,15 @@ const useUpdateCategory = () => {
     }
   };
 
-  return { updateCategory, isSuccess, isLoading, isError, setIsError, error };
+  return {
+    updateCategory,
+    isSuccess,
+    setIsSuccess,
+    isLoading,
+    isError,
+    setIsError,
+    error,
+  };
 };
 
 export { useUpdateCategory };
