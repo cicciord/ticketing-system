@@ -34,7 +34,6 @@ exports.getTickets = () => {
     `;
     db.all(sql, (err, rows) => {
       if (err) reject(err);
-      console.log("rows", rows);
       resolve(rows.map(parseTicket));
     });
   });
@@ -63,7 +62,7 @@ exports.getTicketState = (ticketId) => {
     `;
     db.get(sql, [ticketId], (err, row) => {
       if (err) reject(err);
-      resolve(row.state === 1 ? "open" : "closed");
+      resolve(row?.state === 1 ? "open" : "closed");
     });
   });
 };
