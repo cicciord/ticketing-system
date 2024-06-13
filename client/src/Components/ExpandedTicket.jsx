@@ -1,3 +1,4 @@
+import React from "react";
 import { Collapse, Container, ListGroup, Placeholder } from "react-bootstrap";
 import { useAdditionalContents } from "../hooks/useAdditionalContents";
 
@@ -21,12 +22,19 @@ function ExpandedTicket({ isExpanded, ticket }) {
     ),
   );
 
+  const textWithBreaks = ticket?.text.split("\n").map((text, index) => (
+    <React.Fragment key={index}>
+      {text}
+      <br />
+    </React.Fragment>
+  ));
+
   return (
     <>
       <Collapse in={isExpanded} className="mt-2 mb-3">
         <Container>
           <ListGroup className="w-100 mb-3">
-            <ListGroup.Item>{ticket?.text}</ListGroup.Item>
+            <ListGroup.Item>{textWithBreaks}</ListGroup.Item>
           </ListGroup>
           <ListGroup className="w-100">
             {isLoading ? (

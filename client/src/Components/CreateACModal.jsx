@@ -33,7 +33,8 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
     }
   }, [isSuccess]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     createAdditionalContent(ticketId, { text });
   };
 
@@ -59,17 +60,15 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
               onChange={(e) => setText(e.target.value)}
             />
           </Form.Group>
+          <Button
+            variant={isError ? "danger" : "primary"}
+            disabled={isLoading}
+            type="submit"
+          >
+            Add
+          </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button
-          variant={isError ? "danger" : "primary"}
-          disabled={isLoading}
-          onClick={handleSubmit}
-        >
-          Add
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 }
