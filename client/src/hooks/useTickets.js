@@ -7,6 +7,7 @@ const useTickets = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isError, setIsError] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const { isLoggedIn } = useUser();
 
@@ -26,9 +27,13 @@ const useTickets = () => {
     };
 
     fetchTickets();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, refresh]);
 
-  return { tickets, isLoading, isError, error };
+  const refetch = () => {
+    setRefresh((prev) => !prev);
+  };
+
+  return { tickets, setTickets, isLoading, isError, error, refetch };
 };
 
 export { useTickets };

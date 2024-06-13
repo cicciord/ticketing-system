@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { isLoggedIn, user } = useUser();
-  const { tickets, isLoading } = useTickets();
+  const { tickets, setTickets, isLoading, refetch } = useTickets();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,8 +21,8 @@ function Home() {
       <Ticket
         key={ticket.ticket_id}
         ticket={ticket}
-        isLoggedIn={isLoggedIn}
-        username={user?.username}
+        refetch={refetch}
+        setTickets={setTickets}
         className="mb-4"
       />
     );

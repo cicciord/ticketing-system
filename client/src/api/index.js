@@ -5,6 +5,9 @@ import { getTickets } from "./getTickets";
 import { getAdditionalContents } from "./getAdditionalContents";
 import { createTicket } from "./createTicket";
 import { createAdditionalContent } from "./createAdditionalContent";
+import { closeTicket } from "./closeTicket";
+import { openTicket } from "./openTicket";
+import { updateCategory } from "./updateCategory";
 
 export default {
   login,
@@ -14,4 +17,7 @@ export default {
   getAdditionalContents,
   createTicket,
   createAdditionalContent,
+  closeTicket,
+  openTicket,
+  updateCategory,
 };
