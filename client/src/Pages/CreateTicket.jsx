@@ -34,8 +34,7 @@ function CreateTicket() {
     }
   }, [isSuccess]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     setShowConfirmModal(true);
   };
 
@@ -89,8 +88,8 @@ function CreateTicket() {
         </Form.Group>
         <Button
           variant={isError ? "danger" : "primary"}
-          type="submit"
           disabled={isLoading}
+          onClick={handleSubmit}
         >
           Create
         </Button>

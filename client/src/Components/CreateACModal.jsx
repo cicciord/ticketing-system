@@ -1,17 +1,18 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useCreateAdditionalContent } from "../hooks/useCreateAdditionalContent";
 
 function CreateACModal({ ticketId, show, handleClose, refetch }) {
+  const [text, setText] = useState("");
   const {
     createAdditionalContent,
     isSuccess,
     isLoading,
     isError,
     setIsError,
-    reset
+    reset,
   } = useCreateAdditionalContent();
 
   useEffect(() => {
@@ -28,13 +29,11 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
       refetch();
       handleClose();
       reset();
+      setText("");
     }
   }, [isSuccess]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const text = form.elements.formText.value;
+  const handleSubmit = () => {
     createAdditionalContent(ticketId, { text });
   };
 
@@ -56,17 +55,21 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
               required
               disabled={isLoading}
               className={`${isError && "border-danger"}`}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
             />
           </Form.Group>
-          <Button
-            variant={isError ? "danger" : "primary"}
-            type="submit"
-            disabled={isLoading}
-          >
-            Add
-          </Button>
         </Form>
       </Modal.Body>
+      <Modal.Footer>
+        <Button
+          variant={isError ? "danger" : "primary"}
+          disabled={isLoading}
+          onClick={handleSubmit}
+        >
+          Add
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 }
