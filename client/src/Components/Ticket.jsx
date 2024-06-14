@@ -5,9 +5,10 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { useCloseTicket } from "../hooks/useCloseTicket";
 import { useOpenTicket } from "../hooks/useOpenTicket";
 import { useUpdateCategory } from "../hooks/useUpdateCategory";
+import { useUser } from "../hooks/useUser";
+import { useGetEstimation } from "../hooks/useGetEstimation";
 
 import ExpandedTicket from "./ExpandedTicket";
-import { useUser } from "../hooks/useUser";
 
 function Ticket({ ticket, className, setTickets }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -16,6 +17,7 @@ function Ticket({ ticket, className, setTickets }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const { user, isLoggedIn } = useUser();
+  const { estimation, estimate } = useGetEstimation();
   const {
     closeTicket,
     isLoading: isClosingTicket,
@@ -34,6 +36,12 @@ function Ticket({ ticket, className, setTickets }) {
     isSuccess: isUpdated,
     setIsSuccess: setIsUpdated,
   } = useUpdateCategory();
+
+  useEffect(() => {
+    if (user?.admin) {
+      estimate(ticket.title, ticket.category);
+    }
+  }, [ticket.title, ticket.category]);
 
   useEffect(() => {
     setIsLoading(isClosingTicket || isOpeningTicket || isUpdatingCategory);
@@ -187,7 +195,9 @@ function Ticket({ ticket, className, setTickets }) {
           <p>{ticket?.title}</p>
           <footer className="blockquote-footer">
             {ticket?.owner_username} on{" "}
-            {dayjs.unix(ticket?.timestamp).format("DD/MM/YYYY")}
+            {dayjs.unix(ticket?.timestamp).format("DD/MM/YYYY")}{" "}
+            {user?.admin &&
+              `- Estimation: ${Math.floor(estimation / 24)} days and ${estimation % 24} hours`}
           </footer>
         </blockquote>
       </Card.Body>

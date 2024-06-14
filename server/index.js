@@ -9,6 +9,7 @@ const { param, checkSchema } = require("express-validator");
 const passport = require("./passport/setup");
 const ticketApi = require("./api/ticket-api");
 const userApi = require("./api/user-api");
+const jwtApi = require("./api/jwt-api");
 const { ticketSchema, additionalContentSchema } = require("./validator");
 
 // init express
@@ -104,6 +105,9 @@ app.put(
 app.post("/api/sessions", userApi.login);
 app.get("/api/sessions/current", userApi.getSession);
 app.delete("/api/sessions/current", userApi.logout);
+
+// JWT ROUTES
+app.get("/api/auth-token", isLoggedIn, jwtApi.getToken);
 
 // activate the server
 app.listen(port, () => {

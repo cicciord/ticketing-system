@@ -8,6 +8,8 @@ import { createAdditionalContent } from "./createAdditionalContent";
 import { closeTicket } from "./closeTicket";
 import { openTicket } from "./openTicket";
 import { updateCategory } from "./updateCategory";
+import { getJWT } from "./getJWT";
+import { getEstimation } from "./getEstimation";
 
 export default {
   login,
@@ -20,4 +22,6 @@ export default {
   closeTicket,
   openTicket,
   updateCategory,
+  getJWT,
+  getEstimation,
 };

@@ -2,6 +2,13 @@
 
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
+const { query, validationResult } = require("express-validator");
+const { expressjwt } = require("express-jwt");
+const jsonwebtoken = require("jsonwebtoken");
+
+const jwtSecret =
+  "qTX6walIEr47p7iXtTgLxDTXJRZYDC9egFjGLIn0rRiahB4T24T4d5f59CtyQmH8";
 
 // init express
 const app = new express();
@@ -11,27 +18,61 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 
-app.get("/api/estimate", (req, res) => {
-  const { title, category } = req.query;
+const corsOptions = {
+  origin: "http://localhost:5173",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
-  const titleSum = title.replace(/\s/g, "").length;
-  const categorySum = category.replace(/\s/g, "").length;
-  const total = titleSum + categorySum;
+app.use(
+  expressjwt({
+    secret: jwtSecret,
+    algorithms: ["HS256"],
+  }),
+);
 
-  const estimate = total * 10 + Math.floor(Math.random() * 240) + 1;
-
-  // compute the day-level presicion
-  const day = Math.floor(estimate / 24);
-
-  // compute the hour-level presicion
-  const hour = estimate % 24;
-
-  res.json({
-    estimate,
-    day,
-    hour,
-  });
+app.use(function (err, _, res, next) {
+  if (err.name === "UnauthorizedError") {
+    res.status(401).json({
+      errors: [{ param: "Server", msg: "Authorization error", path: err.code }],
+    });
+  } else {
+    next();
+  }
 });
+
+app.get(
+  "/api/estimation",
+  [query("title").isString(), query("category").isString()],
+  (req, res) => {
+    const err = validationResult(req);
+    const errList = [];
+    if (!err.isEmpty()) {
+      errList.push(...err.errors.map((e) => e.msg));
+      return res.status(400).json({ errors: errList });
+    }
+
+    const admin = req.auth?.admin;
+
+    const { title, category } = req.query;
+
+    const titleSum = title.replace(/\s/g, "").length;
+    const categorySum = category.replace(/\s/g, "").length;
+    const total = titleSum + categorySum;
+
+    const estimation = total * 10 + Math.floor(Math.random() * 240) + 1;
+
+    if (admin) {
+      return res.json({
+        estimation,
+      });
+    } else {
+      return res.json({
+        estimation: Math.floor(estimation / 24) * 24,
+      });
+    }
+  },
+);
 
 // activate the server
 app.listen(port, () => {

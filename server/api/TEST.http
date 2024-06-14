@@ -48,11 +48,19 @@ POST http://localhost:3001/api/sessions HTTP/1.1
 content-type: application/json
 
 {
-    "username": "admin1",
+    "username": "user1",
     "password": "passwd1"
 }
 ###
 
+## Get current session
+GET http://localhost:3001/api/sessions/current HTTP/1.1
+###
+
 ## Delete current session
 DELETE http://localhost:3001/api/sessions/current HTTP/1.1
+###
+
+## Get JWT token
+GET http://localhost:3001/api/auth-token HTTP/1.1
 ###

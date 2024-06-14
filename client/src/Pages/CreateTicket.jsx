@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useCreateTicket } from "../hooks/useCreateTicket";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
+import { useGetEstimation } from "../hooks/useGetEstimation";
 import ConfirmTicketModal from "../Components/ConfirmTicketModal";
 
 function CreateTicket() {
@@ -14,6 +16,8 @@ function CreateTicket() {
   const { createTicket, isSuccess, isLoading, isError, setIsError } =
     useCreateTicket();
   const navigate = useNavigate();
+
+  const { estimate, estimation } = useGetEstimation();
 
   useEffect(() => {
     document.title = "Create Ticket";
@@ -37,6 +41,7 @@ function CreateTicket() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowConfirmModal(true);
+    estimate(title, category);
   };
 
   return (
@@ -101,6 +106,7 @@ function CreateTicket() {
         title={title}
         category={category}
         text={text}
+        estimation={estimation}
         handleSubmit={() => createTicket({ title, category, text })}
       />
     </>

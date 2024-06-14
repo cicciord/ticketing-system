@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState(null);
   const [isError, setIsError] = useState(false);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -52,6 +53,22 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  const getToken = async () => {
+    let jwtToken = null;
+    setIsLoading(true);
+    try {
+      jwtToken = (await API.getJWT()).token;
+      setIsError(false);
+      setToken(jwtToken);
+    } catch (error) {
+      setError(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+    return jwtToken;
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -64,6 +81,8 @@ const UserProvider = ({ children }) => {
         error,
         isError,
         setIsError,
+        getToken,
+        token,
       }}
     >
       {children}

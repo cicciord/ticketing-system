@@ -8,7 +8,7 @@ import { Button, Card, Placeholder } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const { isLoggedIn, user } = useUser();
+  const { isLoggedIn } = useUser();
   const { tickets, setTickets, isLoading, refetch } = useTickets();
   const navigate = useNavigate();
 

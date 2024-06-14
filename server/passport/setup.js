@@ -21,7 +21,11 @@ async function verify(username, password, cb) {
     if (!timingSafeEqual(Buffer.from(user.password, "hex"), hash)) {
       return cb(null, false, { message: "Username or password is incorrect" });
     } else {
-      return cb(null, user);
+      return cb(null, {
+        id: user.id,
+        username: user.username,
+        admin: user.admin ? true : false,
+      });
     }
   });
 }

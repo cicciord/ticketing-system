@@ -1,14 +1,17 @@
 import React from "react";
 import { Modal, Button, Card } from "react-bootstrap";
+import { useUser } from "../hooks/useUser";
 
 function ConfirmTicketModal({
   title,
   category,
   text,
+  estimation,
   show,
   handleClose,
   handleSubmit,
 }) {
+  const { user } = useUser();
   const textWithBreaks = text.split("\n").map((t, index) => (
     <React.Fragment key={index}>
       {t}
@@ -29,6 +32,10 @@ function ConfirmTicketModal({
               {category}
             </Card.Subtitle>
             <Card.Text>{textWithBreaks}</Card.Text>
+            <Card.Text>
+              Estimation: {Math.floor(estimation / 24)} days{" "}
+              {user?.admin && `and ${estimation % 24} hours`}
+            </Card.Text>
           </Card.Body>
         </Card>
       </Modal.Body>
