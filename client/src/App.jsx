@@ -5,6 +5,7 @@ import Layout from "./Pages/Layout";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import CreateTicket from "./Pages/CreateTicket";
+import _404NotFound from "./Pages/_404NotFound";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="create-ticket" element={<CreateTicket />} />
         </Route>
+        <Route path="*" element={<_404NotFound />} />
       </Routes>
     </BrowserRouter>
   );

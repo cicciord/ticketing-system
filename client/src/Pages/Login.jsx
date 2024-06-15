@@ -15,7 +15,7 @@ function Login() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+      navigate(-1);
     }
   }, [isLoggedIn, navigate]);
 
@@ -40,7 +40,13 @@ function Login() {
   return (
     <>
       <ToastContainer position="top-end" className="m-4">
-        <Toast show={showToast} onClose={() => setShowToast(false)} bg="danger" autohide delay={5000}>
+        <Toast
+          show={showToast}
+          onClose={() => setShowToast(false)}
+          bg="danger"
+          autohide
+          delay={5000}
+        >
           <Toast.Header>Error</Toast.Header>
           <Toast.Body>{error?.error?.message}</Toast.Body>
         </Toast>
