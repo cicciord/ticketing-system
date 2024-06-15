@@ -20,23 +20,34 @@ function ConfirmTicketModal({
   ));
 
   return (
-    <Modal show={show} onHide={handleClose} data-bs-theme="dark" centered size="lg">
+    <Modal
+      show={show}
+      onHide={handleClose}
+      data-bs-theme="dark"
+      centered
+      size="lg"
+    >
       <Modal.Header closeButton>
         <Modal.Title>Confirm New Ticket</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Card className="border-0">
-          <Card.Body>
+        <Card className="border border-secondary">
+          <Card.Header>
             <Card.Title>{title}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
               {category}
             </Card.Subtitle>
+          </Card.Header>
+          <Card.Body>
             <Card.Text>{textWithBreaks}</Card.Text>
-            <Card.Text>
-              Estimation: {Math.floor(estimation / 24)} days{" "}
+          </Card.Body>
+          <Card.Footer>
+            <Card.Text className="text-muted">
+              This ticket is expected to be closed in{" "}
+              {Math.floor(estimation / 24)} days{" "}
               {user?.admin && `and ${estimation % 24} hours`}
             </Card.Text>
-          </Card.Body>
+          </Card.Footer>
         </Card>
       </Modal.Body>
       <Modal.Footer>

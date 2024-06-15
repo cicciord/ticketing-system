@@ -198,13 +198,18 @@ function Ticket({ ticket, className, setTickets }) {
           <p>{ticket?.title}</p>
           <footer className="blockquote-footer">
             {ticket?.owner_username} on{" "}
-            {dayjs.unix(ticket?.timestamp).format("DD/MM/YYYY")}{" "}
-            {user?.admin &&
-              ticket?.state === "open" &&
-              `- Estimation: ${Math.floor(estimation / 24)} days and ${estimation % 24} hours`}
+            {dayjs.unix(ticket?.timestamp).format("DD/MM/YYYY")}
           </footer>
         </blockquote>
       </Card.Body>
+      {user?.admin && ticket?.state === "open" && (
+        <Card.Body>
+          <Card.Text className="text-muted">
+            This ticket is estimated to be closed in{" "}
+            {`${Math.floor(estimation / 24)} days and ${estimation % 24} hours`}
+          </Card.Text>
+        </Card.Body>
+      )}
       {isLoggedIn && (
         <Card.Footer className="d-flex flex-column justify-content-center align-items-center">
           {isExpanded ? (

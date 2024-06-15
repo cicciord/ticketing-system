@@ -40,7 +40,7 @@ function Login() {
   return (
     <>
       <ToastContainer position="top-end" className="m-4">
-        <Toast show={showToast} onClose={() => setShowToast(false)} bg="danger">
+        <Toast show={showToast} onClose={() => setShowToast(false)} bg="danger" autohide delay={5000}>
           <Toast.Header>Error</Toast.Header>
           <Toast.Body>{error?.error?.message}</Toast.Body>
         </Toast>
