@@ -1,6 +1,6 @@
 import { Navbar, Container, Button } from "react-bootstrap";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { BsStar } from "react-icons/bs";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { useUser } from "../hooks/useUser";
 
 function Layout() {
@@ -36,7 +36,7 @@ function Layout() {
             {isLoggedIn && (
               <Navbar.Text className="mx-3 d-flex align-items-center">
                 {user?.username}{" "}
-                {user?.admin ? <BsStar className="mx-2" /> : ""}{" "}
+                {user?.admin ? <MdAdminPanelSettings className="mx-2" /> : ""}{" "}
               </Navbar.Text>
             )}
             {isLoggedIn ? (

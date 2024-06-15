@@ -54,7 +54,6 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
               as="textarea"
               rows={3}
               required
-              autoFocus
               disabled={isLoading}
               className={`${isError && "border-danger"}`}
               value={text}
