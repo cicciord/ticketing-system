@@ -44,6 +44,7 @@ const UserProvider = ({ children }) => {
       await API.logout();
       setIsError(false);
       setUser(null);
+      setToken(null);
       setIsLoggedIn(false);
     } catch (error) {
       setError(error);
