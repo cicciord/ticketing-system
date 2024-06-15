@@ -51,7 +51,7 @@ const useGetEstimation = () => {
     }
   };
 
-  return { estimate, estimation, isLoading, isError, error };
+  return { estimate, estimation, setEstimation, isLoading, isError, error };
 };
 
 export { useGetEstimation };

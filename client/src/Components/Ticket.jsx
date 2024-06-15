@@ -17,7 +17,7 @@ function Ticket({ ticket, className, setTickets }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const { user, isLoggedIn } = useUser();
-  const { estimation, estimate } = useGetEstimation();
+  const { estimation, setEstimation, estimate } = useGetEstimation();
   const {
     closeTicket,
     isLoading: isClosingTicket,
@@ -38,10 +38,13 @@ function Ticket({ ticket, className, setTickets }) {
   } = useUpdateCategory();
 
   useEffect(() => {
-    if (user?.admin) {
+    if (ticket.state === "closed") {
+      setEstimation(null);
+    }
+    if (user?.admin && ticket.state === "open") {
       estimate(ticket.title, ticket.category);
     }
-  }, [ticket.title, ticket.category]);
+  }, [ticket.title, ticket.category, ticket.state]);
 
   useEffect(() => {
     setIsLoading(isClosingTicket || isOpeningTicket || isUpdatingCategory);
@@ -197,6 +200,7 @@ function Ticket({ ticket, className, setTickets }) {
             {ticket?.owner_username} on{" "}
             {dayjs.unix(ticket?.timestamp).format("DD/MM/YYYY")}{" "}
             {user?.admin &&
+              ticket?.state === "open" &&
               `- Estimation: ${Math.floor(estimation / 24)} days and ${estimation % 24} hours`}
           </footer>
         </blockquote>
