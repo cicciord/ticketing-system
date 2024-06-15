@@ -39,7 +39,7 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
   };
 
   return (
-    <Modal show={show} onHide={handleClose} data-bs-theme="dark">
+    <Modal show={show} onHide={handleClose} data-bs-theme="dark" centered>
       <Modal.Header closeButton>
         <Modal.Title>Add Content</Modal.Title>
       </Modal.Header>
@@ -54,6 +54,7 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
               as="textarea"
               rows={3}
               required
+              autoFocus
               disabled={isLoading}
               className={`${isError && "border-danger"}`}
               value={text}

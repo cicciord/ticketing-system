@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCreateTicket } from "../hooks/useCreateTicket";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Toast, ToastContainer } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../hooks/useUser";
 import { useGetEstimation } from "../hooks/useGetEstimation";
 import ConfirmTicketModal from "../Components/ConfirmTicketModal";
 
@@ -12,8 +11,9 @@ function CreateTicket() {
   const [text, setText] = useState("");
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
-  const { createTicket, isSuccess, isLoading, isError, setIsError } =
+  const { createTicket, isSuccess, isLoading, isError, error, setIsError } =
     useCreateTicket();
   const navigate = useNavigate();
 
@@ -25,6 +25,7 @@ function CreateTicket() {
 
   useEffect(() => {
     if (isError) {
+      setShowToast(true);
       const timer = setTimeout(() => {
         setIsError(false);
       }, 2000);
@@ -46,6 +47,12 @@ function CreateTicket() {
 
   return (
     <>
+      <ToastContainer position="top-end" className="m-4">
+        <Toast show={showToast} onClose={() => setShowToast(false)} bg="danger" autohide delay={5000}>
+          <Toast.Header>Error</Toast.Header>
+          <Toast.Body>{error?.error}</Toast.Body>
+        </Toast>
+      </ToastContainer>
       <Form
         className={`w-50 p-4 border border-${isError ? "danger" : "secondary"} rounded`}
         onSubmit={handleSubmit}

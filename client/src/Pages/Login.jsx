@@ -1,10 +1,12 @@
-import { useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Form, Button, Toast, ToastContainer } from "react-bootstrap";
 import { useUser } from "../hooks/useUser";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { login, isLoading, isLoggedIn, isError, setIsError } = useUser();
+  const [showToast, setShowToast] = useState(false);
+  const { login, isLoading, isLoggedIn, isError, error, setIsError } =
+    useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +21,7 @@ function Login() {
 
   useEffect(() => {
     if (isError) {
+      setShowToast(true);
       const timer = setTimeout(() => {
         setIsError(false);
       }, 2000);
@@ -35,39 +38,47 @@ function Login() {
   };
 
   return (
-    <Form
-      className={`w-50 p-4 border border-${isError ? "danger" : "secondary"} rounded`}
-      onSubmit={handleSubmit}
-    >
-      <Form.Group className="mb-3" controlId="formUsername">
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter username"
-          required
-          disabled={isLoading}
-          className={`${isError && "border-danger"}`}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          required
-          disabled={isLoading}
-          className={`${isError && "border-danger"}`}
-        />
-      </Form.Group>
-      <Button
-        variant={isError ? "danger" : "primary"}
-        type="submit"
-        disabled={isLoading}
+    <>
+      <ToastContainer position="top-end" className="m-4">
+        <Toast show={showToast} onClose={() => setShowToast(false)} bg="danger">
+          <Toast.Header>Error</Toast.Header>
+          <Toast.Body>{error?.error?.message}</Toast.Body>
+        </Toast>
+      </ToastContainer>
+      <Form
+        className={`w-50 p-4 border border-${isError ? "danger" : "secondary"} rounded`}
+        onSubmit={handleSubmit}
       >
-        Log In
-      </Button>
-    </Form>
+        <Form.Group className="mb-3" controlId="formUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter username"
+            required
+            disabled={isLoading}
+            className={`${isError && "border-danger"}`}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            required
+            disabled={isLoading}
+            className={`${isError && "border-danger"}`}
+          />
+        </Form.Group>
+        <Button
+          variant={isError ? "danger" : "primary"}
+          type="submit"
+          disabled={isLoading}
+        >
+          Log In
+        </Button>
+      </Form>
+    </>
   );
 }
 
