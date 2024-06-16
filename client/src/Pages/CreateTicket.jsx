@@ -30,13 +30,13 @@ function CreateTicket() {
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [isError]);
+  }, [isError, setIsError]);
 
   useEffect(() => {
     if (isSuccess) {
       navigate("/");
     }
-  }, [isSuccess]);
+  }, [isSuccess, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

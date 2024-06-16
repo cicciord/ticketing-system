@@ -17,6 +17,7 @@ const UserProvider = ({ children }) => {
         const user = await API.getUser();
         setUser({ id: user.id, username: user.username, admin: user.admin });
         setIsLoggedIn(true);
+        /* eslint-disable no-empty */
       } catch (error) {}
     };
 

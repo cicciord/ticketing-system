@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "./useUser";
 import API from "../api";
 
@@ -32,7 +32,7 @@ const useAdditionalContents = (id) => {
     };
 
     fetchAdditionalContents();
-  }, [isLoggedIn, refresh]);
+  }, [isLoggedIn, refresh, id]);
 
   const refetch = () => setRefresh((prev) => !prev);
 

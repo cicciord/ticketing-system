@@ -46,7 +46,14 @@ function Ticket({ ticket, className, setTickets }) {
     if (user?.admin && ticket.state === "open") {
       estimate(ticket.title, ticket.category);
     }
-  }, [ticket.title, ticket.category, ticket.state]);
+  }, [
+    ticket.title,
+    ticket.category,
+    ticket.state,
+    estimate,
+    setEstimation,
+    user?.admin,
+  ]);
 
   useEffect(() => {
     setIsLoading(isClosingTicket || isOpeningTicket || isUpdatingCategory);
@@ -65,7 +72,7 @@ function Ticket({ ticket, className, setTickets }) {
     }
 
     setIsUpdated(false);
-  }, [isUpdated]);
+  }, [isUpdated, category, setIsUpdated, setTickets, ticket?.ticket_id]);
 
   useEffect(() => {
     if (isClosed) {
@@ -80,7 +87,7 @@ function Ticket({ ticket, className, setTickets }) {
     }
 
     setIsClosed(false);
-  }, [isClosed]);
+  }, [isClosed, setIsClosed, setTickets, ticket?.ticket_id]);
 
   useEffect(() => {
     if (isOpened) {
@@ -95,7 +102,7 @@ function Ticket({ ticket, className, setTickets }) {
     }
 
     setIsOpened(false);
-  }, [isOpened]);
+  }, [isOpened, setIsOpened, setTickets, ticket?.ticket_id]);
 
   const handleTicketClose = () => {
     closeTicket(ticket.ticket_id);

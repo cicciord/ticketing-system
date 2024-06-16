@@ -22,7 +22,7 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [isError]);
+  }, [isError, setIsError]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -31,7 +31,7 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
       reset();
       setText("");
     }
-  }, [isSuccess]);
+  }, [isSuccess, handleClose, refetch, reset]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
