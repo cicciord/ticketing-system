@@ -18,12 +18,17 @@ function CreateTicket() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = useUser();
-  const { estimate, estimation, isLoading: isLoadingEstimation } = useGetEstimation();
+  const {
+    estimate,
+    estimation,
+    isLoading: isLoadingEstimation,
+  } = useGetEstimation();
 
   useEffect(() => {
     document.title = "Create Ticket";
   }, []);
 
+  // timeout for error toast and border color
   useEffect(() => {
     if (isError) {
       setShowToast(true);
@@ -34,6 +39,7 @@ function CreateTicket() {
     }
   }, [isError, setIsError]);
 
+  // redirect to home page after successful ticket creation
   useEffect(() => {
     if (isSuccess) {
       navigate("/");
@@ -42,10 +48,10 @@ function CreateTicket() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowConfirmModal(true);
     if (!isLoggedIn) {
       navigate("/login");
     } else {
+      setShowConfirmModal(true);
       estimate(title, category);
     }
   };

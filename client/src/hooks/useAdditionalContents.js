@@ -13,6 +13,7 @@ const useAdditionalContents = (id) => {
   const { isLoggedIn } = useUser();
 
   useEffect(() => {
+    // reset state on logout
     if (!isLoggedIn) {
       setAdditionalContents([]);
       return;
@@ -35,6 +36,7 @@ const useAdditionalContents = (id) => {
     fetchAdditionalContents();
   }, [isLoggedIn, refresh, id]);
 
+  // refetch additional contents (needed for updating)
   const refetch = () => setRefresh((prev) => !prev);
 
   return { additionalContents, isLoading, isError, error, refetch, refresh };

@@ -16,7 +16,6 @@ const parseTicket = (data) => {
   };
 };
 
-// query the database for all tickets
 exports.getTickets = () => {
   return new Promise((resolve, reject) => {
     const sql = `

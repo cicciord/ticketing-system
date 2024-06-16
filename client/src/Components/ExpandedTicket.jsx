@@ -22,6 +22,7 @@ function ExpandedTicket({ isExpanded, ticket }) {
     ),
   );
 
+  // Split the text by new lines and add a break element after each line
   const textWithBreaks = ticket?.text.split("\n").map((text, index) => (
     <React.Fragment key={index}>
       {text}

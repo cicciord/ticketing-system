@@ -1,14 +1,4 @@
-const {
-  getTickets,
-  getTicketOwnerId,
-  getTicketState,
-  getAdditionalContents,
-  createTicket,
-  createAdditionalContent,
-  openTicket,
-  closeTicket,
-  updateCategory,
-} = require("../dao/ticket-dao");
+const ticketDao = require("../dao/ticket-dao");
 
 const { validationResult } = require("express-validator");
 
@@ -18,7 +8,7 @@ const errorFormatter = ({ location, msg, param }) => {
 
 exports.getTickets = async function (req, res) {
   try {
-    const tickets = await getTickets();
+    const tickets = await ticketDao.getTickets();
     if (req.isAuthenticated()) {
       res.json(tickets);
     } else {
@@ -40,7 +30,7 @@ exports.getAdditionalContents = async function (req, res) {
 
   try {
     const { id } = req.params;
-    const additionalContents = await getAdditionalContents(id);
+    const additionalContents = await ticketDao.getAdditionalContents(id);
     res.json(additionalContents);
   } catch (error) {
     res.status(500).json(error);
@@ -56,7 +46,7 @@ exports.createTicket = async function (req, res) {
   try {
     const ticket = req.body;
     const { id: owner_id } = req.user;
-    const ticketId = await createTicket({ ...ticket, owner_id });
+    const ticketId = await ticketDao.createTicket({ ...ticket, owner_id });
     res.json({ ticketId });
   } catch (error) {
     res.status(500).json(error);
@@ -71,7 +61,7 @@ exports.createAdditionalContent = async function (req, res) {
 
   let state;
   try {
-    state = await getTicketState(req.params.id);
+    state = await ticketDao.getTicketState(req.params.id);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -84,7 +74,7 @@ exports.createAdditionalContent = async function (req, res) {
     const ticketId = req.params.id;
     const additionalContent = req.body;
     const authorId = req.user.id;
-    const id = await createAdditionalContent({
+    const id = await ticketDao.createAdditionalContent({
       ...additionalContent,
       ticket_id: ticketId,
       author_id: authorId,
@@ -103,7 +93,7 @@ exports.openTicket = async function (req, res) {
 
   try {
     const { id } = req.params;
-    await openTicket(id);
+    await ticketDao.openTicket(id);
     res.json({ id });
   } catch (error) {
     res.status(500).json(error);
@@ -121,13 +111,13 @@ exports.closeTicket = async function (req, res) {
 
     let ownerId;
     try {
-      ownerId = await getTicketOwnerId(id);
+      ownerId = await ticketDao.getTicketOwnerId(id);
     } catch (error) {
       res.status(500).json(error);
     }
 
     if (req.user.admin || req.user.id === ownerId) {
-      await closeTicket(id);
+      await ticketDao.closeTicket(id);
       res.json({ id });
     } else {
       res.status(401).json({ error: "Not authorized" });
@@ -149,7 +139,7 @@ exports.updateCategory = async function (req, res) {
     console.log("API");
     console.log("ticketId", ticketId);
     console.log("category", category);
-    const id = await updateCategory({
+    const id = await ticketDao.updateCategory({
       category,
       ticketId,
     });

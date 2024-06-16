@@ -17,10 +17,6 @@ function Layout() {
     navigate("/login");
   };
 
-  const handleLogoutPress = () => {
-    logout();
-  };
-
   return (
     <>
       <Navbar
@@ -29,7 +25,7 @@ function Layout() {
         data-bs-theme="dark"
         fixed="top"
       >
-        <Container >
+        <Container>
           <Navbar.Brand href="#" onClick={handleHomePress}>
             Ticketing System
           </Navbar.Brand>
@@ -42,11 +38,7 @@ function Layout() {
               </Navbar.Text>
             )}
             {isLoggedIn ? (
-              <Button
-                variant="secondary"
-                onClick={handleLogoutPress}
-                disabled={isLoading}
-              >
+              <Button variant="secondary" onClick={logout} disabled={isLoading}>
                 Log Out
               </Button>
             ) : (
@@ -60,7 +52,10 @@ function Layout() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container className="d-flex flex-column align-items-center" style={{marginTop: "6em"}}>
+      <Container
+        className="d-flex flex-column align-items-center"
+        style={{ marginTop: "6em" }}
+      >
         <Outlet />
       </Container>
     </>

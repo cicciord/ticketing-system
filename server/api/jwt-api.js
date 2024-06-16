@@ -1,7 +1,7 @@
 const jsonwebtoken = require("jsonwebtoken");
+require("dotenv").config();
 
-const jwtSecret =
-  "qTX6walIEr47p7iXtTgLxDTXJRZYDC9egFjGLIn0rRiahB4T24T4d5f59CtyQmH8";
+const jwtSecret = process.env.JWT_SECRET;
 const expireTime = 60;
 
 exports.getToken = (req, res) => {

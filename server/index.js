@@ -5,6 +5,7 @@ const session = require("express-session");
 const cors = require("cors");
 const morgan = require("morgan");
 const { param, checkSchema } = require("express-validator");
+require("dotenv").config();
 
 const passport = require("./passport/setup");
 const ticketApi = require("./api/ticket-api");
@@ -32,7 +33,7 @@ app.use(cors(corsOptions));
 // enable session management
 app.use(
   session({
-    secret: "test secret",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { httpOnly: true },
@@ -50,6 +51,7 @@ const isLoggedIn = (req, res, next) => {
   return res.status(401).json({ error: "Not authorized" });
 };
 
+// middleware to check if the user is logged in as an admin
 const isLoggedInAdmin = (req, res, next) => {
   if (req.isAuthenticated() && req.user.admin) {
     return next();

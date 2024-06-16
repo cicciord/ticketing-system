@@ -20,7 +20,12 @@ function Ticket({ ticket, className, setTickets }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const { user, isLoggedIn } = useUser();
-  const { estimation, setEstimation, estimate, isLoading: isLoadingEstimation } = useGetEstimation();
+  const {
+    estimation,
+    setEstimation,
+    estimate,
+    isLoading: isLoadingEstimation,
+  } = useGetEstimation();
   const {
     closeTicket,
     isLoading: isClosingTicket,
@@ -40,6 +45,7 @@ function Ticket({ ticket, className, setTickets }) {
     setIsSuccess: setIsUpdated,
   } = useUpdateCategory();
 
+  // fetch estimation on ticket state change
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (ticket.state === "closed") {
@@ -50,10 +56,12 @@ function Ticket({ ticket, className, setTickets }) {
     }
   }, [ticket.title, ticket.category, ticket.state, setEstimation, user?.admin]);
 
+  // group all loading states
   useEffect(() => {
     setIsLoading(isClosingTicket || isOpeningTicket || isUpdatingCategory);
   }, [isClosingTicket, isOpeningTicket, isUpdatingCategory]);
 
+  // update local state on category change
   useEffect(() => {
     if (isUpdated) {
       setTickets((tickets) => {
@@ -69,6 +77,7 @@ function Ticket({ ticket, className, setTickets }) {
     setIsUpdated(false);
   }, [isUpdated, category, setIsUpdated, setTickets, ticket?.ticket_id]);
 
+  // update local state on ticket close
   useEffect(() => {
     if (isClosed) {
       setTickets((tickets) => {
@@ -84,6 +93,7 @@ function Ticket({ ticket, className, setTickets }) {
     setIsClosed(false);
   }, [isClosed, setIsClosed, setTickets, ticket?.ticket_id]);
 
+  // update local state on ticket open
   useEffect(() => {
     if (isOpened) {
       setTickets((tickets) => {
@@ -107,11 +117,13 @@ function Ticket({ ticket, className, setTickets }) {
     openTicket(ticket.ticket_id);
   };
 
+  // handle catergory change in state (needed to show update button)
   const handleCategroyChange = (e) => {
     setCategory(e.target.value);
     setCategoryChanged(true);
   };
 
+  // handle category update api
   const handleUpdateCategory = () => {
     updateCategory(ticket.ticket_id, category);
     setCategoryChanged(false);
@@ -125,6 +137,7 @@ function Ticket({ ticket, className, setTickets }) {
       className={`w-50 ${className}`}
     >
       <Card.Header className="d-flex justify-content-between align-items-center">
+        {/* Admin view to change category */}
         {user?.admin ? (
           <div className="d-flex">
             <Form.Select
@@ -155,6 +168,7 @@ function Ticket({ ticket, className, setTickets }) {
         ) : (
           <p className="m-1">{ticket?.category}</p>
         )}
+        {/* Admin view to change the sate of the ticket */}
         {user?.admin ? (
           <div>
             <Badge
@@ -179,15 +193,18 @@ function Ticket({ ticket, className, setTickets }) {
         ) : user?.username === ticket?.owner_username &&
           !user?.admin &&
           ticket?.state === "open" ? (
-          <Badge
-            as="button"
-            bg="warning"
-            text="dark"
-            onClick={handleTicketClose}
-            disabled={isLoading}
-          >
-            close ticket
-          </Badge>
+          <>
+            {/* Normal user owner of the ticket view to close the ticket */}
+            <Badge
+              as="button"
+              bg="warning"
+              text="dark"
+              onClick={handleTicketClose}
+              disabled={isLoading}
+            >
+              close ticket
+            </Badge>
+          </>
         ) : (
           <Badge
             bg={ticket?.state === "open" ? "success" : "danger"}
@@ -210,7 +227,9 @@ function Ticket({ ticket, className, setTickets }) {
         <Card.Body>
           <Card.Text className="text-muted">
             This ticket is estimated to be closed in{" "}
-            {isLoadingEstimation ? "..." : `${Math.floor(estimation / 24)} days and ${estimation % 24} hours`}
+            {isLoadingEstimation
+              ? "..."
+              : `${Math.floor(estimation / 24)} days and ${estimation % 24} hours`}
           </Card.Text>
         </Card.Body>
       )}

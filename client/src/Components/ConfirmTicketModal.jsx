@@ -14,6 +14,8 @@ function ConfirmTicketModal({
   handleSubmit,
 }) {
   const { user } = useUser();
+
+  // Split the text by new line and add a break element after each line
   const textWithBreaks = text.split("\n").map((t, index) => (
     <React.Fragment key={index}>
       {t}

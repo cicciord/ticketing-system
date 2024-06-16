@@ -12,6 +12,7 @@ const UserProvider = ({ children }) => {
   const [isError, setIsError] = useState(false);
   const [token, setToken] = useState(null);
 
+  // Check if user is logged already in
   useEffect(() => {
     const checkLogin = async () => {
       try {

@@ -4,6 +4,7 @@ import { ListGroup } from "react-bootstrap";
 import dayjs from "dayjs";
 
 function AdditionalContent({ additionalContent }) {
+  // Split the text by new line and add a break element after each line
   const textWithBreaks = additionalContent?.ac_text
     .split("\n")
     .map((text, index) => (

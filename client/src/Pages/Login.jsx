@@ -14,12 +14,14 @@ function Login() {
     document.title = "Log In";
   }, []);
 
+  // Redirect to previous page if user is logged in
   useEffect(() => {
     if (isLoggedIn) {
       navigate(-1);
     }
   }, [isLoggedIn, navigate]);
 
+  // timeout for error toast and border color
   useEffect(() => {
     if (isError) {
       setShowToast(true);

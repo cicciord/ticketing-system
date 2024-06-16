@@ -16,6 +16,7 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
     reset,
   } = useCreateAdditionalContent();
 
+  // Reset error state after 2 seconds (needed for the border to turn red)
   useEffect(() => {
     if (isError) {
       const timer = setTimeout(() => {
@@ -25,6 +26,7 @@ function CreateACModal({ ticketId, show, handleClose, refetch }) {
     }
   }, [isError, setIsError]);
 
+  // Refetch data and close modal if content was successfully added
   useEffect(() => {
     if (isSuccess) {
       refetch();
