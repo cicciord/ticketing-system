@@ -6,6 +6,6 @@ module.exports = {
       ],
     },
   },
-  title: { isString: true },
-  text: { isString: true },
+  title: { isString: true, notEmpty: true },
+  text: { isString: true, notEmpty: true },
 };

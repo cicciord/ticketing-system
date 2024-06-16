@@ -1,3 +1,3 @@
 module.exports = {
-  text: { isString: true },
+  text: { isString: true, notEmpty: true},
 };
