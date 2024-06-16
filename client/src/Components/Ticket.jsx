@@ -20,7 +20,7 @@ function Ticket({ ticket, className, setTickets }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const { user, isLoggedIn } = useUser();
-  const { estimation, setEstimation, estimate } = useGetEstimation();
+  const { estimation, setEstimation, estimate, isLoading: isLoadingEstimation } = useGetEstimation();
   const {
     closeTicket,
     isLoading: isClosingTicket,
@@ -210,7 +210,7 @@ function Ticket({ ticket, className, setTickets }) {
         <Card.Body>
           <Card.Text className="text-muted">
             This ticket is estimated to be closed in{" "}
-            {`${Math.floor(estimation / 24)} days and ${estimation % 24} hours`}
+            {isLoadingEstimation ? "..." : `${Math.floor(estimation / 24)} days and ${estimation % 24} hours`}
           </Card.Text>
         </Card.Body>
       )}

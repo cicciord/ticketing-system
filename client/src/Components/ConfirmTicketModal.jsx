@@ -8,6 +8,7 @@ function ConfirmTicketModal({
   category,
   text,
   estimation,
+  isLoading,
   show,
   handleClose,
   handleSubmit,
@@ -45,8 +46,9 @@ function ConfirmTicketModal({
           <Card.Footer>
             <Card.Text className="text-muted">
               This ticket is expected to be closed in{" "}
-              {Math.floor(estimation / 24)} days{" "}
-              {user?.admin && `and ${estimation % 24} hours`}
+              {isLoading
+                ? "..."
+                : `${Math.floor(estimation / 24)} days${user?.admin ? ` and ${estimation % 24} hours` : ""}`}
             </Card.Text>
           </Card.Footer>
         </Card>

@@ -24,11 +24,12 @@ function Layout() {
   return (
     <>
       <Navbar
-        className="shadow mb-5 border-bottom border-secondary"
+        className="shadow border-bottom border-secondary"
         bg="dark"
         data-bs-theme="dark"
+        fixed="top"
       >
-        <Container>
+        <Container >
           <Navbar.Brand href="#" onClick={handleHomePress}>
             Ticketing System
           </Navbar.Brand>
@@ -59,7 +60,7 @@ function Layout() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container className="d-flex flex-column align-items-center">
+      <Container className="d-flex flex-column align-items-center" style={{marginTop: "6em"}}>
         <Outlet />
       </Container>
     </>

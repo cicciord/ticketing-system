@@ -18,7 +18,7 @@ function CreateTicket() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = useUser();
-  const { estimate, estimation } = useGetEstimation();
+  const { estimate, estimation, isLoading: isLoadingEstimation } = useGetEstimation();
 
   useEffect(() => {
     document.title = "Create Ticket";
@@ -125,6 +125,7 @@ function CreateTicket() {
         category={category}
         text={text}
         estimation={estimation}
+        isLoading={isLoadingEstimation}
         handleSubmit={() => createTicket({ title, category, text })}
       />
     </>
