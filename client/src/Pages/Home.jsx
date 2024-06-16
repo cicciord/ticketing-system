@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { useUser } from "../hooks/useUser";
-import { useTickets } from "../hooks/useTickets";
+import { useUser, useTickets } from "../hooks";
 import { BsPlusLg } from "react-icons/bs";
 
 import Ticket from "../Components/Ticket";

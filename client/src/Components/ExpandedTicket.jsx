@@ -1,10 +1,10 @@
 import React from "react";
+import { useState } from "react";
 import { Collapse, Container, ListGroup, Placeholder } from "react-bootstrap";
-import { useAdditionalContents } from "../hooks/useAdditionalContents";
+import { useAdditionalContents } from "../hooks";
 
 import AdditionalContent from "./AdditionalContent";
 import CreateACModal from "./CreateACModal";
-import { useState } from "react";
 
 function ExpandedTicket({ isExpanded, ticket }) {
   const [showModal, setShowModal] = useState(false);

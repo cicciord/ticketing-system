@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button, Card } from "react-bootstrap";
-import { useUser } from "../hooks/useUser";
+import { useUser } from "../hooks";
 
 function ConfirmTicketModal({
   title,

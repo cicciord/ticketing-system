@@ -2,11 +2,13 @@ import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import { Card, Badge, Form } from "react-bootstrap";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { useCloseTicket } from "../hooks/useCloseTicket";
-import { useOpenTicket } from "../hooks/useOpenTicket";
-import { useUpdateCategory } from "../hooks/useUpdateCategory";
-import { useUser } from "../hooks/useUser";
-import { useGetEstimation } from "../hooks/useGetEstimation";
+import {
+  useCloseTicket,
+  useOpenTicket,
+  useUpdateCategory,
+  useUser,
+  useGetEstimation,
+} from "../hooks";
 
 import ExpandedTicket from "./ExpandedTicket";
 
