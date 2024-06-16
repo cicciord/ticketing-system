@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useUser, useTickets } from "../hooks";
+import { Button, Card, Placeholder } from "react-bootstrap";
 import { BsPlusLg } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 import Ticket from "../Components/Ticket";
-import { Button, Card, Placeholder } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useUser, useTickets } from "../hooks";
 
 function Home() {
   const { isLoggedIn } = useUser();

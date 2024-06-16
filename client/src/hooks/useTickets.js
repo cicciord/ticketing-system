@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useUser } from "./useUser";
+
 import API from "../api";
+import { useUser } from "./useUser";
 
 const useTickets = () => {
   const [tickets, setTickets] = useState([]);

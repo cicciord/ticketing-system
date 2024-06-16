@@ -1,5 +1,5 @@
-import { handleHttpRes } from "./utils/handleHttpRes";
 import { SERVER_URL } from "./constants/server";
+import { handleHttpRes } from "./utils/handleHttpRes";
 
 export const getAdditionalContents = async (id) => {
   return handleHttpRes(
@@ -7,5 +7,5 @@ export const getAdditionalContents = async (id) => {
       method: "GET",
       credentials: "include",
     }),
-  )
-}
+  );
+};

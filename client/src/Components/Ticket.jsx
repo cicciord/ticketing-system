@@ -1,7 +1,9 @@
-import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import { Card, Badge, Form } from "react-bootstrap";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+
+import dayjs from "dayjs";
+
 import {
   useCloseTicket,
   useOpenTicket,
@@ -9,7 +11,6 @@ import {
   useUser,
   useGetEstimation,
 } from "../hooks";
-
 import ExpandedTicket from "./ExpandedTicket";
 
 function Ticket({ ticket, className, setTickets }) {
@@ -39,6 +40,7 @@ function Ticket({ ticket, className, setTickets }) {
     setIsSuccess: setIsUpdated,
   } = useUpdateCategory();
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (ticket.state === "closed") {
       setEstimation(null);
@@ -46,14 +48,7 @@ function Ticket({ ticket, className, setTickets }) {
     if (user?.admin && ticket.state === "open") {
       estimate(ticket.title, ticket.category);
     }
-  }, [
-    ticket.title,
-    ticket.category,
-    ticket.state,
-    estimate,
-    setEstimation,
-    user?.admin,
-  ]);
+  }, [ticket.title, ticket.category, ticket.state, setEstimation, user?.admin]);
 
   useEffect(() => {
     setIsLoading(isClosingTicket || isOpeningTicket || isUpdatingCategory);

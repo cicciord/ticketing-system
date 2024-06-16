@@ -1,5 +1,5 @@
-import { handleHttpRes } from "./utils/handleHttpRes";
 import { SERVER_URL } from "./constants/server";
+import { handleHttpRes } from "./utils/handleHttpRes";
 
 export const login = async (username, password) => {
   return handleHttpRes(

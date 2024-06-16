@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useCreateTicket, useGetEstimation } from "../hooks";
 import { Form, Button, Toast, ToastContainer } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+
 import ConfirmTicketModal from "../Components/ConfirmTicketModal";
+import { useCreateTicket, useGetEstimation, useUser } from "../hooks";
 
 function CreateTicket() {
   const [title, setTitle] = useState("");
@@ -16,6 +17,7 @@ function CreateTicket() {
     useCreateTicket();
   const navigate = useNavigate();
 
+  const { isLoggedIn } = useUser();
   const { estimate, estimation } = useGetEstimation();
 
   useEffect(() => {
@@ -41,7 +43,11 @@ function CreateTicket() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowConfirmModal(true);
-    estimate(title, category);
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else {
+      estimate(title, category);
+    }
   };
 
   return (

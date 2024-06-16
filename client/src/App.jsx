@@ -1,10 +1,10 @@
-import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Layout from "./Pages/Layout";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
+import "./App.scss";
 import CreateTicket from "./Pages/CreateTicket";
+import Home from "./Pages/Home";
+import Layout from "./Pages/Layout";
+import Login from "./Pages/Login";
 import _404NotFound from "./Pages/_404NotFound";
 
 function App() {

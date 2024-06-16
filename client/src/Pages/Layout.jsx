@@ -1,6 +1,7 @@
 import { Navbar, Container, Button } from "react-bootstrap";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { MdAdminPanelSettings } from "react-icons/md";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
 import { useUser } from "../hooks";
 
 function Layout() {

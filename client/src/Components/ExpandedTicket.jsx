@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { Collapse, Container, ListGroup, Placeholder } from "react-bootstrap";
-import { useAdditionalContents } from "../hooks";
 
+import { useAdditionalContents } from "../hooks";
 import AdditionalContent from "./AdditionalContent";
 import CreateACModal from "./CreateACModal";
 

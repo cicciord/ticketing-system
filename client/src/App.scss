@@ -1,17 +1,17 @@
 // dark theme
-$body-bg: #282A36;
-$body-color: #F8F8F2;
+$body-bg: #282a36;
+$body-color: #f8f8f2;
 
 // dracula theme
 $theme-colors: (
-  "primary": #BD93F9,
-  "secondary": #6272A4,
-  "success": #50FA7B,
-  "info": #8BE9FD,
-  "warning": #F1FA8C,
-  "danger": #FF5555,
-  "light": #F8F8F2,
-  "dark": #44475A
+  "primary": #bd93f9,
+  "secondary": #6272a4,
+  "success": #50fa7b,
+  "info": #8be9fd,
+  "warning": #f1fa8c,
+  "danger": #ff5555,
+  "light": #f8f8f2,
+  "dark": #44475a,
 );
 
 // Custom styles for disabled input fields
@@ -29,4 +29,4 @@ textarea[disabled]::placeholder {
   color: lighten($body-color, 30%) !important;
 }
 
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
