@@ -16,7 +16,7 @@
   - request parameters: id of the ticket
   - response: additional blocks of text associated to the ticket
 - POST `/api/tickets`
-  - request body content: ticket title, categroy and inital block of text
+  - request body content: ticket title, category and inital block of text
   - response body content: the created ticket id
 - POST `/api/tickets/:id`
   - request parameters: id of the ticket
@@ -52,7 +52,7 @@
 ## Database Tables
 
 - Table `Users` - contains id username password salt admin
-- Table `Tickets` - contains id owner_id state categroy title timestamp text
+- Table `Tickets` - contains id owner_id state category title timestamp text
 - Table `AdditionalContents` - contains id ticket_id author_id timestamp text
 
 ## Main React Components
@@ -68,13 +68,15 @@
 
 ## Screenshot
 
-![Screenshot](./img/screenshot.png)
+![Home Screenshot](./img/home.png)
+
+![Form Screenshot](./img/form.png)
 
 ## Users Credentials
 
 - username: Satoshi Nakamoto, password: genesisBlock123 (admin)
-- username: Hal Finney, password: hodlForever (admin)
+- username: Hal Finney, password: hodlForever
+- username: Peter Todd, password: opensourceOrDie (admin)
 - username: Vitalik Buterin, password: ethIsKing
-- username: SEC Representative, password: banCrypto123
 - username: Maxim Orlovsky, password: rgbRevolution
 

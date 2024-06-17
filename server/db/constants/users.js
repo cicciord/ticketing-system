@@ -7,16 +7,16 @@ module.exports = [
   {
     username: "Hal Finney",
     password: "hodlForever",
+    admin: false,
+  },
+  {
+    username: "Peter Todd",
+    password: "opensourceOrDie",
     admin: true,
   },
   {
     username: "Vitalik Buterin",
     password: "ethIsKing",
-    admin: false,
-  },
-  {
-    username: "SEC Representative",
-    password: "banCrypto123",
     admin: false,
   },
   {

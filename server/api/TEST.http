@@ -3,7 +3,7 @@ GET http://localhost:3001/api/tickets HTTP/1.1
 ###
 
 ##
-GET http://localhost:3001/api/tickets/2 HTTP/1.1
+GET http://localhost:3001/api/tickets/100 HTTP/1.1
 ###
 
 ## Create a ticket
@@ -27,7 +27,7 @@ content-type: application/json
 ###
 
 ## Set status of a ticket as open
-PUT http://localhost:3001/api/tickets/2/open HTTP/1.1
+PUT http://localhost:3001/api/tickets/100/open HTTP/1.1
 ###
 
 ## Set status of a ticket as closed
@@ -48,8 +48,8 @@ POST http://localhost:3001/api/sessions HTTP/1.1
 content-type: application/json
 
 {
-    "username": "user1",
-    "password": "passwd1"
+    "username": "Satoshi Nakamoto",
+    "password": "genesisBlock123"
 }
 ###
 

@@ -33,6 +33,10 @@ exports.getTickets = () => {
     `;
     db.all(sql, (err, rows) => {
       if (err) reject(err);
+      if (!rows) {
+        reject(new Error("No tickets found"));
+        return;
+      }
       resolve(rows.map(parseTicket));
     });
   });
@@ -47,6 +51,7 @@ exports.getTicketOwnerId = (ticketId) => {
     `;
     db.get(sql, [ticketId], (err, row) => {
       if (err) reject(err);
+      if (!row) reject(new Error("Ticket not found"));
       resolve(row.owner_id);
     });
   });
@@ -150,6 +155,7 @@ exports.openTicket = (ticketId) => {
     `;
     db.run(sql, [ticketId], function (err) {
       if (err) reject(err);
+      if (this.changes === 0) reject(new Error("Ticket not found"));
       resolve();
     });
   });
@@ -164,6 +170,7 @@ exports.closeTicket = (ticketId) => {
     `;
     db.run(sql, [ticketId], function (err) {
       if (err) reject(err);
+      if (this.changes === 0) reject(new Error("Ticket not found"));
       resolve();
     });
   });
@@ -181,6 +188,7 @@ exports.updateCategory = ({ ticketId, category }) => {
     `;
     db.run(sql, [category, ticketId], function (err) {
       if (err) reject(err);
+      if (this.changes === 0) reject(new Error("Ticket not found"));
       resolve();
     });
   });

@@ -16,7 +16,7 @@ function AdditionalContent({ additionalContent }) {
 
   return (
     <ListGroup.Item>
-      <div className="mx-2">
+      <div className="mx-2 py-2">
         <div className="d-flex justify-content-between">
           <div className="fw-bold text-secondary">
             {additionalContent?.author_username}

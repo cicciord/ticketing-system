@@ -35,7 +35,7 @@ function ExpandedTicket({ isExpanded, ticket }) {
       <Collapse in={isExpanded} className="mt-2 mb-3">
         <Container>
           <ListGroup className="w-100 mb-3">
-            <ListGroup.Item>{textWithBreaks}</ListGroup.Item>
+            <ListGroup.Item className="py-3">{textWithBreaks}</ListGroup.Item>
           </ListGroup>
           <ListGroup className="w-100">
             {isLoading ? (

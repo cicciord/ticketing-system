@@ -63,11 +63,12 @@ exports.createAdditionalContent = async function (req, res) {
   try {
     state = await ticketDao.getTicketState(req.params.id);
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 
   if (state === "closed") {
-    return res.status(400).json({ error: "Ticket is closed" });
+    res.status(400).json({ error: "Ticket is closed" });
+    return
   }
 
   try {
