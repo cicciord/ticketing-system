@@ -5,10 +5,9 @@ const morgan = require("morgan");
 const cors = require("cors");
 const { query, validationResult } = require("express-validator");
 const { expressjwt } = require("express-jwt");
-const jsonwebtoken = require("jsonwebtoken");
+require("dotenv").config();
 
-const jwtSecret =
-  "qTX6walIEr47p7iXtTgLxDTXJRZYDC9egFjGLIn0rRiahB4T24T4d5f59CtyQmH8";
+const jwtSecret = process.env.JWT_SECRET;
 
 // init express
 const app = new express();

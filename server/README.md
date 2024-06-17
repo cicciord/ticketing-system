@@ -1,15 +1,21 @@
 # Server
 
-## Generate empty Database
+## Initialize the database
 
 ```sh
-sqlite3 db/tickets.db < db/templates/empty_tables.sql
+sqlite3 db/tickets.db < db/templates/starter_tables.sql
 ```
 
-If a database already exists and you want to delete all data, you can use the following command:
+If a database already exists and you want to restore all the example data, you can use the following command:
 
 ```sh 
-rm db/tickets.db && sqlite3 db/tickets.db < db/templates/empty_tables.sql
+rm db/tickets.db && sqlite3 db/tickets.db < db/templates/starter_tables.sql
 ```
 
-If you want to create a database with the example starting data, you can use the `starter_tables.sql` file instead.
+## Environment variables
+
+To set up example environment variables, you can use the following command:
+
+```sh
+cp .env.example .env
+```
