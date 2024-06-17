@@ -22,7 +22,7 @@ function AdditionalContent({ additionalContent }) {
             {additionalContent?.author_username}
           </div>
           <div className="text-secondary">
-            {dayjs.unix(additionalContent?.ac_timestamp).format("DD/MM/YYYY")}
+            {dayjs.unix(additionalContent?.ac_timestamp).format("DD/MM/YYYY HH:mm:ss")}
           </div>
         </div>
         {textWithBreaks}
