@@ -218,8 +218,11 @@ function Ticket({ ticket, className, setTickets }) {
         <blockquote className="blockquote mb-0">
           <p>{ticket?.title}</p>
           <footer className="blockquote-footer">
-            {ticket?.owner_username} on{" "}
-            {dayjs.unix(ticket?.timestamp).format("DD/MM/YYYY HH:mm:ss")}
+            <span className="fw-semibold">{ticket?.owner_username}</span>
+            <span>
+              {" "}
+              on {dayjs.unix(ticket?.timestamp).format("DD/MM/YYYY HH:mm:ss")}
+            </span>
           </footer>
         </blockquote>
       </Card.Body>
