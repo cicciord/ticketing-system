@@ -1,5 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Y8bW3OQP)
-# Exam #1234: "Exam Title"
+# Exam #1: "Ticketing System"
 ## Student: s323518 LATERZA FRANCESCO 
 
 ## React Client Application Routes
@@ -11,7 +11,7 @@
 ## API Server
 
 - GET `/api/tickets`
-  - response: list of tickets
+  - response body content: list of tickets
 - GET `api/tickets/:id`
   - request parameters: id of the ticket
   - response: additional blocks of text associated to the ticket
@@ -40,7 +40,7 @@
 - DELETE `/api/sessions/current`
   - response body content: empty
 - GET `api/auth-token`
-  - response: token
+  - response body content: token
 
 ## API Server2
 
