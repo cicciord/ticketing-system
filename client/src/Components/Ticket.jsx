@@ -20,27 +20,31 @@ function Ticket({ ticket, className, setTickets }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const { user, isLoggedIn } = useUser();
+
   const {
     estimation,
     setEstimation,
     estimate,
     isLoading: isLoadingEstimation,
   } = useGetEstimation();
+
   const {
     closeTicket,
     isLoading: isClosingTicket,
     isSuccess: isClosed,
     setIsSuccess: setIsClosed,
   } = useCloseTicket();
+
   const {
     openTicket,
     isLoading: isOpeningTicket,
     isSuccess: isOpened,
     setIsSuccess: setIsOpened,
   } = useOpenTicket();
+
   const {
     updateCategory,
-    isUpdatingCategory,
+    isLoading: isUpdatingCategory,
     isSuccess: isUpdated,
     setIsSuccess: setIsUpdated,
   } = useUpdateCategory();

@@ -9,9 +9,10 @@ import CreateACModal from "./CreateACModal";
 function ExpandedTicket({ isExpanded, ticket }) {
   const [showModal, setShowModal] = useState(false);
 
-  const { additionalContents, isLoading, refetch } = useAdditionalContents(
-    ticket.ticket_id,
-  );
+  const { additionalContents, isLoading, refetch } = useAdditionalContents({
+    id: ticket.ticket_id,
+    disable: !isExpanded,
+  });
 
   const renderedAdditionalContent = additionalContents.map(
     (additionalContent) => (
