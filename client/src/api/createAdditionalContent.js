@@ -3,7 +3,7 @@ import { handleHttpRes } from "./utils/handleHttpRes";
 
 export const createAdditionalContent = async (ticketId, data) => {
   return handleHttpRes(
-    fetch(`${SERVER_URL}/tickets/${ticketId}`, {
+    fetch(`${SERVER_URL}/tickets/${ticketId}/contents`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

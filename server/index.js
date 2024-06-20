@@ -61,8 +61,9 @@ const isLoggedInAdmin = (req, res, next) => {
 
 // TICKETS ROUTES
 app.get("/api/tickets", ticketApi.getTickets);
+
 app.get(
-  "/api/tickets/:id",
+  "/api/tickets/:id/contents",
   [param("id").isInt({ min: 1 })],
   isLoggedIn,
   ticketApi.getAdditionalContents,
@@ -75,7 +76,7 @@ app.post(
   ticketApi.createTicket,
 );
 app.post(
-  "/api/tickets/:id/",
+  "/api/tickets/:id/contents",
   [
     param("id").isInt({ min: 1 }),
     checkSchema(additionalContentSchema, ["body"]),
@@ -84,19 +85,19 @@ app.post(
   ticketApi.createAdditionalContent,
 );
 
-app.put(
+app.patch(
   "/api/tickets/:id/open",
   [param("id").isInt({ min: 0 })],
   isLoggedInAdmin,
   ticketApi.openTicket,
 );
-app.put(
+app.patch(
   "/api/tickets/:id/close",
   [param("id").isInt({ min: 1 })],
   isLoggedIn,
   ticketApi.closeTicket,
 );
-app.put(
+app.patch(
   "/api/tickets/:id/category",
   [param("id").isInt({ min: 1 })],
   isLoggedInAdmin,
