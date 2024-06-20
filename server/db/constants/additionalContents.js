@@ -65,10 +65,10 @@ Cheers,
 Peter`,
   },
   {
-    author_id: 3,
+    author_id: 4,
     ticket_id: 4,
     timestamp: dayjs("2014-11-17T11:30:25").unix(),
-    text: `Hal,
+    text: `Peter,
 
 I see your point, but think of the innovation potential! We could have decentralized memes and cat currencies. It would be like the Internet, but with value. Anyway, food for thought!
 
@@ -101,7 +101,7 @@ Maxim`,
     author_id: 5,
     ticket_id: 5,
     timestamp: dayjs("2022-03-25T15:38:12").unix(),
-    text: `Hal, Vitalik,
+    text: `Vitalik,
 
   I understand your concerns and excitement. We can maintain Bitcoin's core principles while expanding its functionality. It's like upgrading from a bicycle to a rocket ship. Let's collaborate to make this happen.
 
@@ -109,7 +109,7 @@ Maxim`,
   Maxim`,
   },
   {
-    author_id: 2,
+    author_id: 3,
     ticket_id: 6,
     timestamp: dayjs("2023-12-19T21:59:04").unix(),
     text: `Maxim,

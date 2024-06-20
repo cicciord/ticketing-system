@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS "AdditionalContents" (
 	"timestamp"	INTEGER NOT NULL,
 	"text"	TEXT NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT),
-	FOREIGN KEY("ticket_id") REFERENCES "Tickets"("id"),
-	FOREIGN KEY("author_id") REFERENCES "Users"("id")
+	FOREIGN KEY("author_id") REFERENCES "Users"("id"),
+	FOREIGN KEY("ticket_id") REFERENCES "Tickets"("id")
 );
 CREATE TABLE IF NOT EXISTS "Tickets" (
 	"id"	INTEGER NOT NULL UNIQUE,
@@ -28,11 +28,11 @@ CREATE TABLE IF NOT EXISTS "Tickets" (
 	PRIMARY KEY("id"),
 	FOREIGN KEY("owner_id") REFERENCES "Users"("id")
 );
-INSERT INTO "Users" VALUES (1,'Satoshi Nakamoto','3d5f992920f67307351c789b518f493a1172a0c83e2d6aa54c7f975bea6a0a601a3251b01f801350d0678f523e6fd5399e6239cbce74d82ab0520fd4abbe25bb','f0ff557f14d7c20319440f8169e4a614',1);
-INSERT INTO "Users" VALUES (2,'Hal Finney','644c26df43cc810f3f0a26cc10349cf9a60c011cc6514653283ccc7aca3a2b992e0b93d5c1949ac432beee30f794e5cb00f8628a3ef073f534c08c4c2f81b38c','a8ff7ce29eac7628842fea9ada700459',0);
-INSERT INTO "Users" VALUES (3,'Peter Todd','e1443bc262e705fa711ac1c2872f01d735803b44b45d97d0abe0511a68143b3a33468376aa6a7975a24b474fc6fd69376987120e8835bee2374bce3549d3ca0b','b50f6dc81e75cb8241030d5b190d438e',1);
-INSERT INTO "Users" VALUES (4,'Vitalik Buterin','eec94228febda03121ca14a97cb2eb0dba4d3bb99e9690a9ccee000f31e079aa48a9e07f80da88337200a3f63e04efcdaffb67e6b1d94c9585bc862d7b3bff5f','52bec72ce7c7a7149f052e4175eee899',0);
-INSERT INTO "Users" VALUES (5,'Maxim Orlovsky','c2f8ac4b78a37d44d57f5ceb7af029a450de69a1e4f4a19176d68f5d2c4528e54695a7ed04ebfe88fa9cdefb53d5b56a1af87c0f05a6b341eab3e5a7a7677cbc','554ccd3f8e2b0debb9689603c9b51d20',0);
+INSERT INTO "Users" VALUES (1,'Satoshi Nakamoto','92f441ab6ef6bf72c1e957caa20ca083893cfeeccbbe24c6225f80343c656276b38cc9d224408464390351d13495b2a77c9a5358ca4402ba06cb1d1c07d4e2c9','bee6fd040c6bc7dcddbdebdba4e71bd2',1);
+INSERT INTO "Users" VALUES (2,'Hal Finney','1932d5557fc597dd384fcc5bc9d11cc11539cd2b1d9617ed5551a3da0d11495d9e94d6db283969753ba91149b7b7decb6bf949e4d72c76e89204fe79438ea57e','136c9265bcbd28a3125beef26cdd1a23',0);
+INSERT INTO "Users" VALUES (3,'Peter Todd','154f02a61a111350d79b5151c4a02c4bbb1bcb66637b538e397f27e769204293a76cb672fe99fc3a43a600c2f540c527d72fea1c0c3cc2e40a12530d94489ee1','5a19089f9afec67c2f82a068ec1d1ba4',1);
+INSERT INTO "Users" VALUES (4,'Vitalik Buterin','5701ad0c51017cf5d36c51707115b9c2cff12a36d018ac375ea9e4afaa04cea54ed834e2cfc3d3238ca3f98ade3dd6437b97bb4ee27ef3087431f7b4e8ca353b','1b4b0f7ae924220d9a08a8f9cb442986',0);
+INSERT INTO "Users" VALUES (5,'Maxim Orlovsky','c4974d8feb5483ed44b8f15e540e3682f30ca8d22e2fac56fcf80c9fbee66803a854c20f23a4674dec8db4879ea34af4dfbb6959fa963759888b49a678b643d7','331a94663fb3793110691319eb4df4c2',0);
 INSERT INTO "AdditionalContents" VALUES (1,1,2,1231053825,'Satoshi,
 
 I''ve reviewed the code and executed the software successfully. The Proof of Work mechanism is intriguing and appears robust. I''m particularly interested in its long-term sustainability and potential vulnerabilities. Any insights on these aspects?
@@ -67,7 +67,7 @@ That''s a... colorful idea. But Bitcoin''s strength lies in its simplicity and s
 
 Cheers,
 Peter');
-INSERT INTO "AdditionalContents" VALUES (7,4,3,1416220225,'Hal,
+INSERT INTO "AdditionalContents" VALUES (7,4,4,1416220225,'Peter,
 
 I see your point, but think of the innovation potential! We could have decentralized memes and cat currencies. It would be like the Internet, but with value. Anyway, food for thought!
 
@@ -85,13 +85,13 @@ INSERT INTO "AdditionalContents" VALUES (9,5,4,1648109866,'Maxim,
 
   Regards,
   Vitalik');
-INSERT INTO "AdditionalContents" VALUES (10,5,5,1648219092,'Hal, Vitalik,
+INSERT INTO "AdditionalContents" VALUES (10,5,5,1648219092,'Vitalik,
 
   I understand your concerns and excitement. We can maintain Bitcoin''s core principles while expanding its functionality. It''s like upgrading from a bicycle to a rocket ship. Let''s collaborate to make this happen.
 
   Regards,
   Maxim');
-INSERT INTO "AdditionalContents" VALUES (11,6,2,1703019544,'Maxim,
+INSERT INTO "AdditionalContents" VALUES (11,6,3,1703019544,'Maxim,
 
 While I understand your concerns, I would like to remind you that the technology built within our ecosystem is open source. This means that it is freely available for anyone to use, modify, and distribute. The open-source nature of our work is what drives innovation and collaboration. Therefore, there should be no expectation of payment for the use of open-source contributions.
 
