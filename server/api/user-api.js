@@ -1,3 +1,5 @@
+"use strict";
+
 const passport = require("../passport/setup");
 
 exports.login = (req, res, next) => {

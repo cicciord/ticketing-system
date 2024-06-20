@@ -1,3 +1,5 @@
+"use strict";
+
 const ticketDao = require("../dao/ticket-dao");
 
 const { validationResult } = require("express-validator");
@@ -68,7 +70,7 @@ exports.createAdditionalContent = async function (req, res) {
 
   if (state === "closed") {
     res.status(400).json({ error: "Ticket is closed" });
-    return
+    return;
   }
 
   try {
