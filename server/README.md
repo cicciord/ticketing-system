@@ -8,7 +8,7 @@ sqlite3 db/tickets.db < db/templates/starter_tables.sql
 
 If a database already exists and you want to restore all the example data, you can use the following command:
 
-```sh 
+```sh
 rm db/tickets.db && sqlite3 db/tickets.db < db/templates/starter_tables.sql
 ```
 

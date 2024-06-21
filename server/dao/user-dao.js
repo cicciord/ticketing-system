@@ -16,4 +16,4 @@ exports.getUser = (username) => {
       resolve(row);
     });
   });
-}
+};
