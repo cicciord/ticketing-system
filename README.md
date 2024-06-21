@@ -1,6 +1,8 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Y8bW3OQP)
+
 # Exam #1: "Ticketing System"
-## Student: s323518 LATERZA FRANCESCO 
+
+## Student: s323518 LATERZA FRANCESCO
 
 ## React Client Application Routes
 
@@ -48,7 +50,6 @@
   - request query parameters: title and category
   - response body content: estimation (in hours)
 
-
 ## Database Tables
 
 - Table `Users` - contains id username password salt admin
@@ -79,4 +80,3 @@
 - username: Peter Todd, password: opensourceOrDie (admin)
 - username: Vitalik Buterin, password: ethIsKing
 - username: Maxim Orlovsky, password: rgbRevolution
-
