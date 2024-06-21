@@ -13,6 +13,7 @@ const useAdditionalContents = ({ id, disable }) => {
 
   const { isLoggedIn } = useUser();
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     // reset state on logout
     if (!isLoggedIn) {

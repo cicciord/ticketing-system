@@ -1,4 +1,4 @@
 {
-    "SERVER_URL": "http://localhost:3001/api",
-    "SERVER2_URL": "http://localhost:3002/api"
+  "SERVER_URL": "http://localhost:3001/api",
+  "SERVER2_URL": "http://localhost:3002/api"
 }
