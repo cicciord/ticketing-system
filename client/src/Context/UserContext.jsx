@@ -30,8 +30,10 @@ const UserProvider = ({ children }) => {
     setIsLoading(true);
     try {
       const user = await API.login(username, password);
+      const token = (await API.getJWT()).token;
       setIsError(false);
       setUser({ id: user.id, username: user.username, admin: user.admin });
+      setToken(token);
       setIsLoggedIn(true);
     } catch (error) {
       setError(error);
