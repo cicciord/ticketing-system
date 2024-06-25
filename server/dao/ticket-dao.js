@@ -177,9 +177,6 @@ exports.closeTicket = (ticketId) => {
 };
 
 exports.updateCategory = ({ ticketId, category }) => {
-  console.log("DAO");
-  console.log("ticketId", ticketId);
-  console.log("category", category);
   return new Promise((resolve, reject) => {
     const sql = `
       UPDATE Tickets

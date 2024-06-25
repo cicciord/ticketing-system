@@ -139,9 +139,6 @@ exports.updateCategory = async function (req, res) {
   try {
     const ticketId = req.params.id;
     const { category } = req.body;
-    console.log("API");
-    console.log("ticketId", ticketId);
-    console.log("category", category);
     const id = await ticketDao.updateCategory({
       category,
       ticketId,
