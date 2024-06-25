@@ -5,9 +5,3 @@ node_modules/
 .DS_Store
 Thumbs.db
 Desktop.ini
-
-# Database
-db/*.db
-
-# env file
-.env

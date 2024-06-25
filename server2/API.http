@@ -1,3 +1,0 @@
-##
-GET http://localhost:3002/api/estimate?title=The%20Hobbit&category=Fantasy
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6ZmFsc2UsImlhdCI6MTcxODM2NzY5OCwiZXhwIjoxNzE4MzY3NzU4LCJzdWIiOiIzIiwianRpIjoiNjllYXE4In0.hKCjYsEmvAI8h6V1XhnxLu0Rxk63ZEArtArRcvXqwsA
