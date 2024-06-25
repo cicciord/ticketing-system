@@ -65,8 +65,6 @@
 - `CreateTicket` (in `CreateTicket.jsx`): form to create a new ticket
 - `ConfirmTicketModal` (in `ConfirmTicketModal.jsx`): modal to confirm the ticket creation
 
-(only _main_ components, minor ones may be skipped)
-
 ## Screenshot
 
 ![Home Screenshot](./img/home.png)
