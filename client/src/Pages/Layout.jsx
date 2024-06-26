@@ -17,6 +17,11 @@ function Layout() {
     navigate("/login");
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <>
       <Navbar
@@ -38,7 +43,11 @@ function Layout() {
               </Navbar.Text>
             )}
             {isLoggedIn ? (
-              <Button variant="secondary" onClick={logout} disabled={isLoading}>
+              <Button
+                variant="secondary"
+                onClick={handleLogout}
+                disabled={isLoading}
+              >
                 Log Out
               </Button>
             ) : (
