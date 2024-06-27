@@ -14,23 +14,23 @@
 
 - GET `/api/tickets`
   - response body content: list of tickets
-- GET `api/tickets/:id`
+- GET `api/tickets/:id/contents`
   - request parameters: id of the ticket
   - response: additional blocks of text associated to the ticket
 - POST `/api/tickets`
   - request body content: ticket title, category and inital block of text
   - response body content: the created ticket id
-- POST `/api/tickets/:id`
+- POST `/api/tickets/:id/contents`
   - request parameters: id of the ticket
   - request body content: new block of text
   - response body content: new block of text id
-- PUT `/api/tickets/:id/open`
+- PATCH `/api/tickets/:id/open`
   - request parameters: id of the ticket
   - response body content: updated ticket id
-- PUT `/api/tickets/:id/close`
+- PATCH `/api/tickets/:id/close`
   - request parameters: id of the ticket
   - response body content: updated ticket id
-- PUT `/api/tickets/:id/category`
+- PATCH `/api/tickets/:id/category`
   - request parameters: id of the ticket
   - request body content: new category
   - response body content: updated ticket id
