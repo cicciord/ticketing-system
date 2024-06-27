@@ -67,7 +67,7 @@ app.get(
       });
     } else {
       return res.json({
-        estimation: Math.floor(estimation / 24) * 24,
+        estimation: Math.round(estimation / 24) * 24,
       });
     }
   },
