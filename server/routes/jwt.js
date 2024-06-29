@@ -3,6 +3,8 @@ const router = express.Router();
 
 const jwtApi = require("../api/jwt-api");
 
-router.get("/", jwtApi.getToken);
+const { isLoggedIn } = require("../middleware/auth");
+
+router.get("/", isLoggedIn, jwtApi.getToken);
 
 module.exports = router;
