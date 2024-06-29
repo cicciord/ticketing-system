@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmTicketModal from "../Components/ConfirmTicketModal";
 import { useCreateTicket, useGetEstimation, useUser } from "../hooks";
 
-function CreateTicket() {
+function CreateTicket({ setTicektCreatedToast }) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("inquiry");
   const [text, setText] = useState("");
@@ -31,6 +31,7 @@ function CreateTicket() {
   // timeout for error toast and border color
   useEffect(() => {
     if (isError) {
+      setShowConfirmModal(false);
       setShowToast(true);
       const timer = setTimeout(() => {
         setIsError(false);
@@ -42,6 +43,7 @@ function CreateTicket() {
   // redirect to home page after successful ticket creation
   useEffect(() => {
     if (isSuccess) {
+      setTicektCreatedToast(true);
       navigate("/");
     }
   }, [isSuccess, navigate]);

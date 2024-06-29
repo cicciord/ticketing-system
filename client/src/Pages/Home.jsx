@@ -1,12 +1,18 @@
 import { useEffect } from "react";
-import { Button, Card, Placeholder } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Placeholder,
+  ToastContainer,
+  Toast,
+} from "react-bootstrap";
 import { BsPlusLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import Ticket from "../Components/Ticket";
 import { useUser, useTickets } from "../hooks";
 
-function Home() {
+function Home({ ticketCreatedToast, setTicektCreatedToast }) {
   const { isLoggedIn } = useUser();
   const { tickets, setTickets, isLoading, refetch } = useTickets();
   const navigate = useNavigate();
@@ -37,6 +43,20 @@ function Home() {
 
   return (
     <>
+      <ToastContainer position="top-end" className="m-4">
+        <Toast
+          show={ticketCreatedToast}
+          onClose={() => setTicektCreatedToast(false)}
+          bg="success"
+          autohide
+          delay={5000}
+        >
+          <Toast.Header className="text-capitalize">Success</Toast.Header>
+          <Toast.Body className="text-dark">
+            Ticket created with success
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
       {isLoading ? (
         <Card className="w-50">
           <Placeholder as={Card.Header} animation="glow">
